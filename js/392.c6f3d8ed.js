@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkkuma_cake"]=self["webpackChunkkuma_cake"]||[]).push([[392],{4392:function(n,u,e){e.r(u),e.d(u,{default:function(){return i}});var r=e(3396);const t=(0,r._)("div",null,"後台",-1);function c(n,u){const e=(0,r.up)("router-view");return(0,r.wg)(),(0,r.iD)(r.HY,null,[t,(0,r.Wm)(e)],64)}var a=e(89);const k={},s=(0,a.Z)(k,[["render",c]]);var i=s}}]);
+//# sourceMappingURL=392.c6f3d8ed.js.map

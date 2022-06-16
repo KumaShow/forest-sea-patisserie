@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkkuma_cake"]=self["webpackChunkkuma_cake"]||[]).push([[775],{775:function(n,u,e){e.r(u),e.d(u,{default:function(){return f}});var r=e(3396);function a(n,u,e,a,c,t){return(0,r.wg)(),(0,r.iD)("div",null," 最新消息 ")}var c={},t=e(89);const k=(0,t.Z)(c,[["render",a]]);var f=k}}]);
+//# sourceMappingURL=775.4331e457.js.map

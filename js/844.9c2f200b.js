@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkkuma_cake"]=self["webpackChunkkuma_cake"]||[]).push([[844],{2844:function(n,e,a){a.r(e),a.d(e,{default:function(){return i}});var c=a(3396);const r={class:"container"};function u(n,e,a,u,t,s){return(0,c.wg)(),(0,c.iD)("div",r," 登入頁面 ")}var t={},s=a(89);const k=(0,s.Z)(t,[["render",u]]);var i=k}}]);
+//# sourceMappingURL=844.9c2f200b.js.map
