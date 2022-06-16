@@ -6,6 +6,12 @@ import { required, email, min } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
+import 'bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import App from './App.vue'
 import router from './router'
 
@@ -28,5 +34,6 @@ const app = createApp(App).use(router)
 app.component('VForm', Form)
 app.component('VField', Field)
 app.component('ErrorMessage', ErrorMessage)
-
+app.use(VueAxios, axios)
+app.use(router)
 app.mount('#app')
