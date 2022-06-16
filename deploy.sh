@@ -17,6 +17,6 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:KumaShow/Vue3-training-week6.git master:gh-pages
+git push -f git@github.com:KumaShow/forest-sea-patisserie.git master:gh-pages
 
 cd -
