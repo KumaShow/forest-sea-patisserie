@@ -1,0 +1,29 @@
+.font-serif {
+  font-family: "Noto Serif TC", serif;
+}
+
+.hover-bg-secondary-200:hover {
+  background-color: $secondary-200;
+  color: #fff;
+}
+
+.hover-text-secondary-200:hover {
+  color: $secondary-200;
+}
+
+// .hover-text-white:hover {
+//   color: #fff !important;
+// }
+
+.width-0 {
+  width: 0 !important;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.img-scale:hover {
+  transform: scale(1.2);
+  transition: all .3s ease;
+}
