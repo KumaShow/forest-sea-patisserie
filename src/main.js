@@ -2,19 +2,20 @@
 /* eslint-disable vue/multi-word-component-names */
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-// axios
 import axios from "axios";
 import VueAxios from "vue-axios";
-// vee-validate
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
-import { required, email, min } from "@vee-validate/rules";
+import {
+  required,
+  email,
+  min,
+  max_value,
+  min_value,
+} from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
-
-// Bootstrap JS
+import VueLazyload from "vue-lazyload";
 import "bootstrap";
-
-// FontAwesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faFacebook,
@@ -28,10 +29,11 @@ import "./assets/stylesheets/main.scss";
 import App from "./App.vue";
 import router from "./router";
 
-// 定義驗證規則
 defineRule("required", required);
 defineRule("email", email);
 defineRule("min", min);
+defineRule("max_value", max_value);
+defineRule("min_value", min_value);
 
 // 設定 vee-validate 全域規則
 configure({
@@ -55,5 +57,14 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(VueAxios, axios);
 app.use(createPinia());
 app.use(router);
+
+import tempImg from "@/assets/images/loading/lazy-loading.gif";
+
+app.use(VueLazyload, {
+  loading: tempImg,
+  error: tempImg,
+  attempt: 3,
+  throttleWait: 500,
+});
 
 app.mount("#app");
