@@ -3,9 +3,7 @@
 </template>
 
 <script type="module">
-export default {
-  components: {},
-};
+export default {};
 </script>
 
 <style scoped></style>
