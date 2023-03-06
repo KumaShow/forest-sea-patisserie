@@ -1,35 +1,43 @@
-# forest-sea-patisserie
+# 森海手作甜點
 
-This template should help get you started developing with Vue 3 in Vite.
+## 專案說明
+以親戚開的甜點店為發想所製作的 SPA 網站，僅供練習使用無實際商業用途。
 
-## Recommended IDE Setup
+Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.github.io/forest-sea-patisserie)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 使用技術
 
-## Customize configuration
+* Vite 環境建置
+* Vue 3 Options API
+* Vue Router 建構路由
+* Vue axios 串接 RESTful API 資料
+* 元件拆分與使用
+* 使用 Pinia 全局狀態管理
+* 使用 ESLint + Prettier 統一程式碼結構
+* 使用 Bootstrap 5 規劃響應式版型
+* Vee-Validate 表單驗證
+* V-Lazyload 圖片懶加載
+* 詳細套件請看 package.json
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## 網站功能
 
-## Project Setup
+### 前台:
 
-```sh
-npm install
-```
+產品頁
+  * 電商商品展示
+  * 商品加入購物車，與加入最愛收藏
 
-### Compile and Hot-Reload for Development
+購物車
+  * 購物車無商品時，顯示按鈕引導顧客前往購買
+  * 刪除商品時，跳出提示 Modal 避免誤刪，並有設置簡單自定義提示動畫效果
+  * 點擊前往結帳會跳轉到確認訂單內容頁面
 
-```sh
-npm run dev
-```
+登入、登出
+  * 管理者可以登入後台管理
+  
+### 後台
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+管理網站
+  * 新增、修改、刪除商品
+  * 新增、修改、刪除優惠卷
+  * 修改、刪除訂單
