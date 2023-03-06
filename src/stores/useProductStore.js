@@ -1,26 +1,34 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import useLoadingStore from "./useLoadingStore";
+import useCartStore from "./useCartStore";
 import useToastMessageStore from "./useToastMessageStore";
 
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { loadingState } = useLoadingStore();
+const { getCarts } = useCartStore();
 const { pushMessage } = useToastMessageStore();
+
 const useProductStore = defineStore("useProductStore", {
   state: () => ({
-    modal: {},
     isShow: false,
     products: [],
+    productsAll: [],
     product: {},
     pagination: {},
     currentPage: 1,
+    categories: [],
+    category: "",
     loadingItem: "",
   }),
   actions: {
-    // 取得所有產品
+    // 取得所有產品含分頁資料
     getProducts(page = 1) {
       this.currentPage = page;
-      const url = `${VITE_API}/api/${VITE_API_PATH}/products?page=${page}`;
+      let url = `${VITE_API}/api/${VITE_API_PATH}/products?page=${page}`;
+      if (this.category) {
+        url = `${VITE_API}/api/${VITE_API_PATH}/products?page=${page}&category=${this.category}`;
+      }
 
       loadingState(true);
 
@@ -30,7 +38,7 @@ const useProductStore = defineStore("useProductStore", {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
           loadingState(false);
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           loadingState(false);
@@ -41,49 +49,65 @@ const useProductStore = defineStore("useProductStore", {
           });
         });
     },
+    // 取得所有產品資料
+    getProductsAll() {
+      const url = `${VITE_API}/api/${VITE_API_PATH}/products/all`;
 
-    // 查看產品細節
-    getProductDetail(productModal, productId) {
-      // 取得單一產品資料後，使用 productModal 內的方法 openModal() 打開 Modal 元件
-      this.getProduct(productId);
-      this.modal = productModal;
-      this.isShow = true;
-      this.modal.openModal();
+      axios
+        .get(url)
+        .then((res) => {
+          this.productsAll = res.data.products;
+          // 取得產品類別
+          this.categories = Array.from(
+            new Set(this.productsAll.map((product) => product.category))
+          );
+        })
+        .catch((err) => console.log(err));
+    },
+
+    // 更新選擇的類別
+    setCategory(category = "") {
+      this.category = category;
+      // console.log(this.category);
     },
 
     // 加入購物車
     addToCart(id, num = 1) {
-      // 外層購物車按鈕預設數量 +1
       const url = `${VITE_API}/api/${VITE_API_PATH}/cart`;
       const data = {
         product_id: id,
         qty: num,
       };
       loadingState(true);
+      // console.log("url:", url);
+      // console.log("data:", data);
 
       axios
         .post(url, { data })
-        .then(() => {
+        .then((res) => {
+          // console.log(res.data);
+          getCarts();
           loadingState(false);
-          if (this.isShow) {
-            this.modal.closeModal();
-            this.isShow = false;
-            loadingState(false);
-          }
-          this.pushMessage({
-            title: "已加入購物車",
-          });
+          // if (this.isShow) {
+          //   this.isShow = false;
+          //   loadingState(false);
+          // }
+          // this.pushMessage({
+          //   title: "已加入購物車",
+          // });
         })
         .catch((err) => {
-          pushMessage({
-            style: "danger",
-            title: "加入購物車失敗，請稍後再試",
-            content: `${err.response.data.message}`,
-          });
+          loadingState(false);
+          // pushMessage({
+          //   style: "danger",
+          //   title: "加入購物車失敗，請稍後再試",
+          //   content: `${err.response.data.message}`,
+          // });
+          console.log(err);
         });
     },
 
-    // 取得單一產品資料
+    // // 取得單一產品資料
     getProduct(productId) {
       const url = `${VITE_API}/api/${VITE_API_PATH}/product/${productId}`;
       loadingState(true);
@@ -92,6 +116,7 @@ const useProductStore = defineStore("useProductStore", {
       axios.get(url).then((res) => {
         this.product = res.data.product;
         loadingState(false);
+        // console.log("getProduct:", this.product);
       });
     },
   },
