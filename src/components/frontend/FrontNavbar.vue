@@ -1,40 +1,25 @@
-<!-- 
-  TODO: 將 header 設置透明，捲到第二個 section 變色
-  TODO: 排版未完成 justify between
-  TODO: 搜尋欄位
--->
 <template>
-  <header class="header sticky-top">
-    <nav class="navbar navbar-expand-lg py-4 navbar-light bg-primary">
+  <header class="header" :class="headerClass" ref="header">
+    <nav class="navbar navbar-expand-lg py-4 navbar-light bg-inherit">
       <div class="container d-flex justify-content-between">
         <h1 class="me-3">
-          <RouterLink to="/" class="logo"
-            >森海 Forest Sea Patisserie</RouterLink
-          >
+          <RouterLink to="/" class="logo">
+            森海 Forest Sea Patisserie
+          </RouterLink>
         </h1>
 
         <div class="d-flex ms-auto d-lg-none">
-          <!-- icon 手機 樣式 -->
-          <form class="d-flex align-items-center position-relative">
-            <input
-              :class="inputClass"
-              class="form-control me-2 py-2 px-4 rounded-1 search-input-pc"
-              type="search"
-              ref="btnSearch"
-              placeholder="找甜點"
-              aria-label="Search"
-            />
-            <button
-              class="bg-transparent border-0 me-6 text-white d-flex"
-              type="button"
-              @click="searchProduct"
-            >
-              <span class="material-symbols-outlined hover-text-secondary-200">
-                search
-              </span>
-            </button>
-          </form>
-          <!-- 購物車按鈕 -->
+          <!-- 手機 搜尋按鈕 -->
+          <button
+            class="bg-transparent border-0 me-6 text-white d-flex"
+            type="button"
+            @click="isInputSearchPhoneShow = !isInputSearchPhoneShow"
+          >
+            <span class="material-symbols-outlined hover-text-secondary-200">
+              search
+            </span>
+          </button>
+          <!-- 手機 購物車按鈕 -->
           <button
             class="bg-transparent border-0 me-6 text-white d-flex position-relative"
             type="button"
@@ -117,24 +102,28 @@
 
         <!-- icon PC 樣式 -->
         <ul class="d-none d-lg-flex align-items-center ms-auto">
-          <!-- 搜尋功能 -->
+          <!-- 搜尋按鈕 -->
           <li>
-            <form class="d-flex align-items-center position-relative">
+            <form
+              class="d-flex align-items-center position-relative"
+              @submit.prevent="searchProduct"
+            >
               <!-- PC 樣式輸入框 -->
               <input
                 v-if="!isMobile"
-                :class="inputClass"
+                :class="{ 'd-none': !isInputSearchShow }"
                 class="form-control me-2 py-2 px-4 rounded-1 search-input-pc"
-                type="search"
+                type="text"
                 ref="btnSearch"
                 placeholder="找甜點"
                 aria-label="Search"
+                v-model.lazy="searchTerm"
               />
               <!-- 搜尋按鈕 -->
               <button
                 class="bg-transparent border-0 me-6 text-white d-flex"
                 type="button"
-                @click="searchProduct"
+                @click="isInputSearchShow = !isInputSearchShow"
               >
                 <span
                   class="material-symbols-outlined hover-text-secondary-200"
@@ -154,7 +143,10 @@
               aria-controls="offcanvasRight"
               @click="getCarts"
             >
-              <span class="material-symbols-outlined hover-text-secondary-200">
+              <span
+                class="material-symbols-outlined hover-text-secondary-200"
+                :class="{ 'material-fill': cart.carts.length }"
+              >
                 shopping_cart
               </span>
               <span
@@ -166,35 +158,43 @@
               </span>
             </button>
           </li>
+          <!-- TODO: 使用 localStorage 判斷最愛內是否有商品 -->
           <!-- 我的最愛按鈕 -->
           <li class="d-none d-md-block">
             <RouterLink to="/favorite" class="bg-transparent text-white d-flex">
               <span class="material-symbols-outlined hover-text-secondary-200">
+                <!-- :class="{ 'material-fill': isFavorite }" -->
                 favorite
               </span>
             </RouterLink>
           </li>
         </ul>
         <!-- 手機搜尋樣式 -->
-        <!-- <div class="bg-primary-dark"> -->
         <div
           class="search-input-phone"
           :class="{ 'd-none': !isInputSearchPhoneShow }"
         >
-          <div class="container position-relative">
+          <form
+            class="container position-relative"
+            @submit.prevent="searchProduct"
+          >
             <input
               id="searchInputPhone"
               type="text"
               class="container bg-transparent py-2 px-4 rounded-1 border-white border-opacity-50 text-white text-opacity-80"
               placeholder="找甜點"
+              v-model.lazy="searchTerm"
             />
-            <label for="searchInputPhone" class="text-white fw-bold"
-              >搜尋</label
+            <label
+              for="searchInputPhone"
+              class="text-white fw-bold"
+              @click="searchProduct"
             >
-          </div>
+              搜尋
+            </label>
+          </form>
         </div>
       </div>
-      <!-- </div> -->
     </nav>
   </header>
   <!-- 購物車列表 offcanvas -->
@@ -205,6 +205,8 @@
 import Collapse from "bootstrap/js/dist/collapse";
 import CartListOffcanvas from "@/components/frontend/CartListOffcanvas.vue";
 import useCartStore from "@/stores/useCartStore";
+import useProductStore from "@/stores/useProductStore";
+import useStatusStore from "@/stores/useStatusStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -212,19 +214,21 @@ export default {
   props: ["isMobile"],
   data() {
     return {
+      isHomeRoute: true,
       isInputSearchShow: false,
-      inputClass: {
-        "opacity-0": true,
-        "width-0": true,
-      },
       isInputSearchPhoneShow: false,
       isCartEmpty: true,
-      collapse: null,
       isCollapseOpen: false,
+      collapse: null,
+      searchTerm: "",
+      headerClass: "",
+      lastScrollTime: 0,
     };
   },
   computed: {
     ...mapState(useCartStore, ["cart"]),
+    ...mapState(useProductStore, ["productsAll"]),
+    ...mapState(useStatusStore, ["scrollPosition", "isNewsPosition"]),
   },
   watch: {
     cart() {
@@ -234,42 +238,78 @@ export default {
         this.isCartEmpty = true;
       }
     },
+
     $route() {
       this.closeCollapse();
+      this.isInputSearchShow = false;
+      this.isInputSearchPhoneShow = false;
+      this.searchTerm = "";
+    },
+
+    "$route.name"(newVal) {
+      this.isHomeRoute = newVal === "home";
+      this.updateHeaderClass();
+    },
+
+    isNewsPosition() {
+      this.updateHeaderClass();
+    },
+
+    isInputSearchPhoneShow() {
+      this.updateHeaderClass();
+    },
+
+    isInputSearchShow() {
+      // 因為 d-none 切換時會抓不到 DOM，所以使用 setTimeout
+      setTimeout(() => {
+        this.$refs.btnSearch.focus();
+      }, 0);
     },
   },
   methods: {
     ...mapActions(useCartStore, ["getCarts"]),
+    ...mapActions(useProductStore, ["getProductsAll", "setQuery"]),
+    ...mapActions(useStatusStore, ["setScrollPosition"]),
 
-    // 搜尋
+    // 搜尋商品
     searchProduct() {
-      // 當設備為手機時
-      if (this.isMobile) {
-        if (this.isInputSearchPhoneShow) {
-          this.isInputSearchPhoneShow = false;
+      this.$router.push({
+        path: "/search",
+      });
+      this.setQuery(this.searchTerm);
+    },
+
+    handleScroll() {
+      this.setScrollPosition(window.scrollY);
+    },
+
+    /* 在首頁時會判斷滾動位置及 menu 開合狀態，設定 header 樣式 */
+    updateHeaderClass() {
+      if (this.isHomeRoute) {
+        if (this.isCollapseOpen || this.isInputSearchPhoneShow) {
+          this.headerClass = "bg-primary bg-opacity-100";
         } else {
-          this.isInputSearchPhoneShow = true;
+          this.headerClass = this.isNewsPosition ? "bg-primary" : "bg-white";
         }
-        // 當設備為 PC 時
-      } else if (!this.isMobile) {
-        if (!this.isInputSearchShow) {
-          this.isInputSearchShow = true;
-          this.inputClass = {
-            "opacity-0": false,
-            "width-0": false,
-          };
-        } else {
-          this.isInputSearchShow = false;
-          this.inputClass = {
-            "opacity-0": true,
-            "width-0": true,
-          };
-        }
-        this.$refs.btnSearch.focus();
+      } else {
+        this.headerClass = "bg-primary";
+      }
+
+      this.headerClass += " " + (this.isHomeRoute ? "fixed-top" : "sticky-top");
+
+      if (this.isHomeRoute && !this.isNewsPosition) {
+        this.headerClass += " bg-opacity-20";
       }
     },
 
     toggleCollapse() {
+      if (!this.isCollapseOpen) {
+        this.isCollapseOpen = true;
+        this.updateHeaderClass();
+      } else {
+        this.isCollapseOpen = false;
+        this.updateHeaderClass();
+      }
       this.collapse.toggle();
     },
 
@@ -278,12 +318,20 @@ export default {
     },
   },
   mounted() {
+    this.isHomeRoute = this.$route.name === "home";
+    this.updateHeaderClass();
+    this.getProductsAll();
     this.collapse = new Collapse(this.$refs.collapse, {
       toggle: false,
     });
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
+
 <style lang="scss" scoped>
 @import "bootstrap/scss/functions";
 @import "@/assets/stylesheets/helpers/variables";
@@ -314,11 +362,11 @@ export default {
     display: none;
   }
   position: absolute;
-  bottom: -75px;
+  bottom: -73px;
   left: 0;
   right: 0;
   padding: 16px;
-  background-color: $primary-dark;
+  background-color: $primary;
   text-align: center;
   animation: moveFromLeft 0.3s ease;
 
@@ -336,23 +384,10 @@ export default {
   }
 }
 
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
-}
-
 .link-active {
   @include respond-min(md) {
     border-bottom: 3px solid #fff;
     transition: 0.3s;
   }
 }
-// .navbar-collapse.show {
-//   background-color: $primary-dark;
-//   position: absolute;
-//   bottom: -230px;
-//   left: 0;
-//   right: 0;
-//   padding-left: 12px;
-//   padding-right: 12px;
-// }
 </style>
