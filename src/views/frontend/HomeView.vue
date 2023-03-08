@@ -4,15 +4,15 @@
     <!-- banner -->
     <section class="section-banner">
       <div class="text-center">
-        <h2 class="display-3 font-serif text-white mb-2">
+        <h2 class="fs-3 fs-md-64 font-serif text-white mb-2">
           穿梭於森林、悠遊於深海
         </h2>
-        <h2 class="text-white text-opacity-80 mb-10">
+        <h2 class="fs-7 fs-md-2 text-white text-opacity-80 mb-10">
           讓我們一起享受自在浪漫的甜點吧!
         </h2>
         <RouterLink
           to="/products"
-          class="btn btn-outline-light hover-bg-secondary-200 px-10 py-4"
+          class="btn btn-outline-light hover-bg-secondary-200 px-6 px-md-10 py-2 py-md-4"
           >立即選購</RouterLink
         >
       </div>
@@ -22,11 +22,14 @@
           alt="往下閱讀更多"
           ref="readMore"
         />
-        <p class="text-white mt-6">閱讀更多</p>
+        <p class="text-white mt-6">往下閱讀更多</p>
       </div>
     </section>
     <!-- 最新消息 -->
-    <section class="section-news bg-primary-dark py-11 py-lg-16">
+    <section
+      class="section-news bg-primary-dark py-11 py-lg-16"
+      ref="sectionNews"
+    >
       <div class="container">
         <div class="news-content row">
           <!-- 圖片 -->
@@ -202,6 +205,8 @@
 <script>
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 import gsap from "gsap";
+import useStatusStore from "@/stores/useStatusStore";
+import { mapActions, mapState } from "pinia";
 
 export default {
   components: {
@@ -210,6 +215,22 @@ export default {
   props: ["isMobile"],
   data() {
     return {};
+  },
+  computed: {
+    ...mapState(useStatusStore, ["scrollPosition"]),
+  },
+  watch: {
+    scrollPosition() {
+      // 當滾到 最新消息 時觸發
+      if (this.scrollPosition >= this.$refs.sectionNews.offsetTop - 50) {
+        this.setNewsPosition(true);
+      } else {
+        this.setNewsPosition(false);
+      }
+    },
+  },
+  methods: {
+    ...mapActions(useStatusStore, ["setScrollPosition", "setNewsPosition"]),
   },
   mounted() {
     const readMoreImg = this.$refs.readMore;
@@ -229,7 +250,7 @@ export default {
 @import "@/assets/stylesheets/helpers/mixin.scss";
 
 .section-banner {
-  min-height: 85vh;
+  min-height: 95vh;
   background-image: url("@/assets/images/landing.png");
   background-size: cover;
   background-position: center;
