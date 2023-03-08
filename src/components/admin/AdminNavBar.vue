@@ -1,56 +1,60 @@
 <template>
-  <header class="header sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark h-100">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover active" to="/admin"
-                >後台</RouterLink
+  <header class="header sticky-top bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-inherit h-100">
+      <div class="bg-dark w-100">
+        <div class="container">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-between bg-dark"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover active" to="/admin"
+                  >後台</RouterLink
+                >
+              </li>
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover" to="/admin/products"
+                  >產品管理</RouterLink
+                >
+              </li>
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover" to="/admin/orders"
+                  >訂單管理</RouterLink
+                >
+              </li>
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover" to="/admin/coupon"
+                  >優惠券管理</RouterLink
+                >
+              </li>
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover" to="/admin/news"
+                  >文章管理</RouterLink
+                >
+              </li>
+              <li class="nav-item me-3 text-decoration-none">
+                <RouterLink class="nav-link link-hover" to="/"
+                  >回首頁</RouterLink
+                >
+              </li>
+            </ul>
+            <div class="navbar-nav">
+              <a href="#" class="nav-link link-hover" @click.prevent="logout"
+                >登出</a
               >
-            </li>
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover" to="/admin/products"
-                >產品管理</RouterLink
-              >
-            </li>
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover" to="/admin/orders"
-                >訂單管理</RouterLink
-              >
-            </li>
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover" to="/admin/coupon"
-                >優惠券管理</RouterLink
-              >
-            </li>
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover" to="/admin/news"
-                >文章管理</RouterLink
-              >
-            </li>
-            <li class="nav-item me-3 text-decoration-none">
-              <RouterLink class="nav-link link-hover" to="/">回首頁</RouterLink>
-            </li>
-          </ul>
-          <div class="navbar-nav">
-            <a href="#" class="nav-link link-hover" @click.prevent="logout"
-              >登出</a
-            >
+            </div>
           </div>
         </div>
       </div>
