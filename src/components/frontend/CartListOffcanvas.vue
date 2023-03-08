@@ -28,9 +28,12 @@
           清空購物車
         </button>
       </div>
-      <div>
+      <div class="position-relative h-75">
         <!-- 購物車無產品 -->
-        <div class="text-center" v-if="!cart.carts.length">
+        <div
+          class="text-center position-absolute top-50 start-50 translate-middle"
+          v-if="!cart.carts.length"
+        >
           <p class="fs-3 my-10">目前無商品</p>
           <button
             type="button"
