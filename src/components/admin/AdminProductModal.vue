@@ -204,8 +204,8 @@
                 >
                 </textarea>
               </div>
-              <div class="mb-3">
-                <div class="form-check">
+              <div class="mb-3 d-flex">
+                <div class="form-check me-4">
                   <input
                     :false-value="0"
                     :true-value="1"
@@ -216,6 +216,32 @@
                   />
                   <label class="form-check-label" for="is_enabled"
                     >是否啟用</label
+                  >
+                </div>
+
+                <div class="form-check me-4">
+                  <input
+                    :false-value="0"
+                    :true-value="1"
+                    v-model="tempProduct.is_hot"
+                    id="is_Hot"
+                    class="form-check-input"
+                    type="checkbox"
+                  />
+                  <label class="form-check-label" for="is_Hot">熱門商品</label>
+                </div>
+
+                <div class="form-check">
+                  <input
+                    :false-value="0"
+                    :true-value="1"
+                    v-model="tempProduct.is_limited"
+                    id="is_Limited"
+                    class="form-check-input"
+                    type="checkbox"
+                  />
+                  <label class="form-check-label" for="is_Limited"
+                    >本月限定</label
                   >
                 </div>
               </div>
@@ -323,3 +349,29 @@ export default {
   },
 };
 </script>
+
+<!-- 
+  產品結構
+  {
+  "data": {
+    "title": "[賣]動物園造型衣服3",
+    "category": "衣服2",
+    "origin_price": 100,
+    "price": 300,
+    "unit": "個",
+    "description": "Sit down please 名設計師設計",
+    "content": "這是內容",
+    "is_enabled": 1,
+    "imageUrl": "主圖網址",
+    "imagesUrl": [
+    "圖片網址一",
+    "圖片網址二",
+    "圖片網址三",
+    "圖片網址四",
+    "圖片網址五"
+    ]
+    // 下面為自訂新增
+    "is_hot": 1,
+    "is_limited": 1
+  }
+} -->
