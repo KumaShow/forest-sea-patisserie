@@ -58,11 +58,11 @@ app.use(VueAxios, axios);
 app.use(createPinia());
 app.use(router);
 
-import tempImg from "@/assets/images/loading/lazy-loading.gif";
+import loadImg from "@/assets/images/loading/lazy-load.gif";
 
 app.use(VueLazyload, {
-  loading: tempImg,
-  error: tempImg,
+  loading: loadImg,
+  error: loadImg,
   attempt: 3,
   throttleWait: 500,
 });
