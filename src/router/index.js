@@ -102,6 +102,22 @@ const routes = [
         },
       },
       {
+        path: "search",
+        name: "search",
+        component: () => import("@/views/frontend/SearchProductsView.vue"),
+        meta: {
+          breadcrumb: [
+            {
+              name: "首頁",
+              link: "home",
+            },
+            {
+              name: "搜尋產品",
+            },
+          ],
+        },
+      },
+      {
         path: "favorite",
         name: "favorite",
         component: () => import("@/views/frontend/FavoriteView.vue"),
