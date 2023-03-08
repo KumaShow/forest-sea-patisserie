@@ -20,6 +20,7 @@ const useProductStore = defineStore("useProductStore", {
     categories: [],
     category: "",
     loadingItem: "",
+    searchTerm: "",
   }),
   actions: {
     // 取得所有產品含分頁資料
@@ -57,10 +58,11 @@ const useProductStore = defineStore("useProductStore", {
         .get(url)
         .then((res) => {
           this.productsAll = res.data.products;
-          // 取得產品類別
+          // 取得產品類別，並使用 Set 去除重複資料
           this.categories = Array.from(
             new Set(this.productsAll.map((product) => product.category))
           );
+          // console.log(this.productsAll);
         })
         .catch((err) => console.log(err));
     },
@@ -69,6 +71,11 @@ const useProductStore = defineStore("useProductStore", {
     setCategory(category = "") {
       this.category = category;
       // console.log(this.category);
+    },
+
+    // 更新搜尋結果
+    setQuery(query) {
+      this.searchTerm = query;
     },
 
     // 加入購物車
@@ -118,6 +125,19 @@ const useProductStore = defineStore("useProductStore", {
         loadingState(false);
         // console.log("getProduct:", this.product);
       });
+    },
+  },
+  getters: {
+    // 依據輸入的搜尋詞顯示篩選後的產品
+    filterProductsList() {
+      return this.searchTerm === ""
+        ? this.productsAll
+        : this.productsAll.filter((item) => {
+            return (
+              item.title.includes(this.searchTerm) ||
+              item.category.includes(this.searchTerm)
+            );
+          });
     },
   },
 });
