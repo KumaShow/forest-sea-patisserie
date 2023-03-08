@@ -1,7 +1,3 @@
-<!-- 
-  TODO:
-    - sticky ?
--->
 <template>
   <section class="bg-gray-200 py-4">
     <div class="container">
@@ -16,6 +12,7 @@
               {{ item.name }}
             </RouterLink>
           </li>
+          <!-- 單一產品頁面顯示品名 -->
           <li class="breadcrumb-item" v-if="this.$route.name === 'product'">
             <a href="#" class="text-gray-500" @click.prevent>
               {{ product.title }}
@@ -66,26 +63,3 @@ export default {
   },
 };
 </script>
-
-<!-- export default {
-  data() {
-    return {
-      currentRouteName: "",
-      routeNameMap: {
-        products: "產品一覽",
-        about: "關於我們",
-        news: "最新消息",
-        faq: "常見問題",
-      },
-    };
-  },
-  watch: {
-    $route(to) {
-      this.currentRouteName = this.routeNameMap[to.name];
-    },
-  },
-  mounted() {
-    // this.path = this.$route.name;
-    // console.log(this.$route.name);
-  },
-}; -->
