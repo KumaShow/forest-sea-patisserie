@@ -1,7 +1,4 @@
 <!-- 
-  TODO:
-    - 連結依據類別變動 v
-    - 樣式調整 v
   BUG:
     - 頁面跳轉問題: 跳轉頁面不會回到全部商品，會保留在上一個類別
 -->
@@ -9,7 +6,7 @@
   <div class="position-relative">
     <aside class="side-menu">
       <h3 class="fs-5 mb-6">商品類別</h3>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush box-shadow-3">
         <li>
           <a
             href="#"
