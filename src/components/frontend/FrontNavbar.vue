@@ -28,7 +28,10 @@
             aria-controls="offcanvasRight"
             @click="getCarts"
           >
-            <span class="material-symbols-outlined hover-text-secondary-200">
+            <span
+              class="material-symbols-outlined hover-text-secondary-200"
+              :class="{ 'material-fill': cart.carts.length }"
+            >
               shopping_cart
             </span>
             <span
@@ -206,7 +209,7 @@ import Collapse from "bootstrap/js/dist/collapse";
 import CartListOffcanvas from "@/components/frontend/CartListOffcanvas.vue";
 import useCartStore from "@/stores/useCartStore";
 import useProductStore from "@/stores/useProductStore";
-import useStatusStore from "@/stores/useStatusStore";
+import useScrollStore from "@/stores/useScrollStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -228,7 +231,7 @@ export default {
   computed: {
     ...mapState(useCartStore, ["cart"]),
     ...mapState(useProductStore, ["productsAll"]),
-    ...mapState(useStatusStore, ["scrollPosition", "isNewsPosition"]),
+    ...mapState(useScrollStore, ["scrollPosition", "isNewsPosition"]),
   },
   watch: {
     cart() {
@@ -269,7 +272,7 @@ export default {
   methods: {
     ...mapActions(useCartStore, ["getCarts"]),
     ...mapActions(useProductStore, ["getProductsAll", "setQuery"]),
-    ...mapActions(useStatusStore, ["setScrollPosition"]),
+    ...mapActions(useScrollStore, ["setScrollPosition"]),
 
     // 搜尋商品
     searchProduct() {
@@ -298,7 +301,7 @@ export default {
       this.headerClass += " " + (this.isHomeRoute ? "fixed-top" : "sticky-top");
 
       if (this.isHomeRoute && !this.isNewsPosition) {
-        this.headerClass += " bg-opacity-20";
+        this.headerClass += " bg-opacity-10";
       }
     },
 
