@@ -3,18 +3,20 @@
   <main v-if="this.$route.path === '/'">
     <!-- banner -->
     <section class="section-banner">
-      <div class="text-center">
-        <h2 class="fs-3 fs-md-64 font-serif text-white mb-2">
-          穿梭於森林、悠遊於深海
-        </h2>
-        <h2 class="fs-7 fs-md-2 text-white text-opacity-80 mb-10">
-          讓我們一起享受自在浪漫的甜點吧!
-        </h2>
-        <RouterLink
-          to="/products"
-          class="btn btn-outline-light hover-bg-secondary-200 px-6 px-md-10 py-2 py-md-4"
-          >立即選購</RouterLink
-        >
+      <div class="section-banner-content">
+        <div class="text-center">
+          <h2 class="fs-3 fs-md-64 font-serif text-white mb-2">
+            穿梭於森林、悠遊於深海
+          </h2>
+          <h2 class="fs-7 fs-md-2 text-white text-opacity-80 mb-10">
+            讓我們一起享受自在浪漫的甜點吧!
+          </h2>
+          <RouterLink
+            to="/products"
+            class="btn btn-outline-light hover-bg-secondary-200 px-6 px-md-10 py-2 py-md-4"
+            >立即選購</RouterLink
+          >
+        </div>
       </div>
       <div class="section-banner-more text-center">
         <img
@@ -110,7 +112,7 @@
           <h2 class="font-serif">熱門商品</h2>
           <img src="@/assets/images/header_line.svg" alt="" />
         </div>
-        <ProductsCarousel />
+        <ProductsCarousel :props-products="filterHotProducts" />
       </div>
     </section>
     <!-- 實體店面 -->
@@ -136,7 +138,7 @@
           </div>
           <!-- 聯絡資訊 -->
           <div class="col-lg-6 lh-sm">
-            <div class="ms-lg-11 text-center text-lg-start">
+            <div class="ms-lg-9 ms-xl-11 text-center text-lg-start">
               <h3 class="mb-2 text-neutral-900 fs-4 fs-lg-2">台南本店</h3>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=台南市中西區友愛街105號"
@@ -151,34 +153,12 @@
                 </h4>
                 <ul class="d-flex justify-content-center">
                   <li
-                    class="me-6 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
+                    v-for="day in articleDayOff"
+                    :key="day"
+                    class="me-5 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
                     style="height: 32px; width: 32px"
                   >
-                    6
-                  </li>
-                  <li
-                    class="me-6 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
-                    style="height: 32px; width: 32px"
-                  >
-                    13
-                  </li>
-                  <li
-                    class="me-6 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
-                    style="height: 32px; width: 32px"
-                  >
-                    19
-                  </li>
-                  <li
-                    class="me-6 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
-                    style="height: 32px; width: 32px"
-                  >
-                    20
-                  </li>
-                  <li
-                    class="me-6 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
-                    style="height: 32px; width: 32px"
-                  >
-                    27
+                    {{ day }}
                   </li>
                 </ul>
               </div>
@@ -191,7 +171,7 @@
               </div>
               <!-- 營業時間： -->
               <div class="d-lg-flex align-items-center text-neutral-900">
-                <h4 class="me-lg-6 mb-6 fs-7">營業時間：</h4>
+                <h4 class="me-lg-6 mb-6 mb-lg-0 fs-7">營業時間：</h4>
                 <p>週一至週日12:00 - 19:00 (週二除外)</p>
               </div>
             </div>
@@ -205,7 +185,9 @@
 <script>
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 import gsap from "gsap";
-import useStatusStore from "@/stores/useStatusStore";
+import useScrollStore from "@/stores/useScrollStore";
+import useCalendarStore from "@/stores/CalendarStore";
+import useProductStore from "@/stores/useProductStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -214,10 +196,14 @@ export default {
   },
   props: ["isMobile"],
   data() {
-    return {};
+    return {
+      tuesdayList: [],
+    };
   },
   computed: {
-    ...mapState(useStatusStore, ["scrollPosition"]),
+    ...mapState(useScrollStore, ["scrollPosition"]),
+    ...mapState(useCalendarStore, ["articleDayOff"]),
+    ...mapState(useProductStore, ["filterHotProducts"]),
   },
   watch: {
     scrollPosition() {
@@ -230,11 +216,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useStatusStore, ["setScrollPosition", "setNewsPosition"]),
+    ...mapActions(useScrollStore, ["setScrollPosition", "setNewsPosition"]),
+    ...mapActions(useCalendarStore, ["getDayOff"]),
   },
   mounted() {
+    this.getDayOff();
     const readMoreImg = this.$refs.readMore;
-
     gsap.to(readMoreImg, {
       y: 15,
       duration: 0.5,
@@ -250,14 +237,30 @@ export default {
 @import "@/assets/stylesheets/helpers/mixin.scss";
 
 .section-banner {
+  position: relative;
   min-height: 95vh;
-  background-image: url("@/assets/images/landing.png");
-  background-size: cover;
-  background-position: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    background-image: url("@/assets/images/photo.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(90%);
+  }
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+
+  &-content {
+    position: relative;
+  }
 
   &-more {
     position: absolute;
