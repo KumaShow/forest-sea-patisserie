@@ -4,6 +4,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import { SetupCalendar } from "v-calendar";
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
 import {
   required,
@@ -15,6 +16,7 @@ import {
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
 import VueLazyload from "vue-lazyload";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 import "bootstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -23,7 +25,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
+import "v-calendar/dist/style.css";
 import "./assets/stylesheets/main.scss";
 
 import App from "./App.vue";
@@ -54,6 +56,8 @@ app.component("Field", Field);
 app.component("ErrorMessage", ErrorMessage);
 app.component("font-awesome-icon", FontAwesomeIcon);
 
+app.use(CKEditor);
+app.use(SetupCalendar, {});
 app.use(VueAxios, axios);
 app.use(createPinia());
 app.use(router);

@@ -156,8 +156,8 @@
                     ></ckeditor>
                   </div>
 
-                  <div class="mb-3">
-                    <div class="form-check">
+                  <div class="mb-3 d-flex">
+                    <div class="form-check me-6">
                       <input
                         class="form-check-input"
                         type="checkbox"
@@ -168,6 +168,22 @@
                         是否公開
                       </label>
                     </div>
+
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        v-model="tempArticle.isDayOff"
+                        id="isDayOff"
+                        @change="openDatePicker"
+                      />
+                      <label class="form-check-label" for="isDayOff">
+                        是否設定公休日
+                      </label>
+                    </div>
+
+                    <DatePickerModal ref="datePicker" />
+                    <!--  -->
                   </div>
                 </div>
               </div>
@@ -199,8 +215,15 @@
 <script>
 import Modal from "bootstrap/js/dist/modal";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import DatePickerModal from "@/components/DatePickerModal.vue";
+import useCalendarStore from "@/stores/CalendarStore";
+import { mapActions, mapState } from "pinia";
+// import { DatePicker } from "v-calendar";
 
 export default {
+  components: {
+    DatePickerModal,
+  },
   props: {
     article: {
       type: Object,
@@ -216,9 +239,12 @@ export default {
   emits: ["update-article"],
   data() {
     return {
+      date: new Date(),
       modal: {},
       tempArticle: {
+        isDayOff: false,
         tag: [""],
+        dayOff: [],
       },
       create_at: "",
       editor: ClassicEditor,
@@ -226,6 +252,9 @@ export default {
         toolbar: ["heading", "|", "bold", "italic"],
       },
     };
+  },
+  computed: {
+    ...mapState(useCalendarStore, ["dayOff", "attributes"]),
   },
   watch: {
     article() {
@@ -245,13 +274,22 @@ export default {
     create_at() {
       this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
     },
+    dayOff() {
+      this.tempArticle.dayOff = this.dayOff;
+    },
   },
   methods: {
+    ...mapActions(useCalendarStore, ["onDayClick"]),
+
     openModal() {
       this.modal.show();
     },
     closeModal() {
       this.modal.hide();
+    },
+
+    openDatePicker() {
+      this.$refs.datePicker.openModal();
     },
 
     // 新增文章
@@ -273,4 +311,8 @@ export default {
 .ck-editor__editable_inline {
   min-height: 300px;
 }
+
+/* .date-picker {
+  position: absolute;
+} */
 </style>
