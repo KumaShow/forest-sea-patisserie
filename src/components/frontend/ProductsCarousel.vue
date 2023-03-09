@@ -26,201 +26,78 @@
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide>
-      <li class="col">
-        <RouterLink :to="`/product/id`" class="">
+    <swiper-slide v-for="product in propsProducts" :key="product.id">
+      <div class="col">
+        <RouterLink :to="`/product/${product.id}`" class="product-link">
           <div class="card box-shadow-3">
-            <div class="position-relative">
+            <div class="overflow-hidden product-img">
+              <img
+                v-lazy="product.imageUrl"
+                class="object-cover w-100"
+                alt="甜點"
+                style="height: 200px"
+              />
               <span
-                class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 position-absolute"
+                v-if="product.is_limited"
+                class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 tag-limited"
                 >本月限定</span
               >
             </div>
-            <div class="overflow-hidden">
-              <img
-                src="@/assets/images/products/dessert1.png"
-                class="object-cover w-100 card-img"
-                alt="甜點"
-              />
-            </div>
-            <div
-              class="card-body p-6 p-md-5 p-lg-6 d-flex flex-column justify-content-between"
-            >
-              <div>
-                <h5 class="card-title fs-5 text-neutral-900 text-truncate">
-                  可麗露 焦糖原味
-                </h5>
+            <div class="card-body">
+              <div
+                class="mb-3 d-flex align-items-center justify-content-between"
+              >
                 <span
-                  class="fs-8 my-4 my-md-1 py-1 px-2 bg-secondary text-white rounded-1 d-inline-block"
-                  >可麗露</span
+                  class="fs-8 py-1 px-2 me-3 bg-secondary text-white rounded-1"
+                  >{{ product.category }}</span
                 >
-                <!-- <div class="my-8 d-flex justify-content-between align-items-center"> -->
-                <p class="card-text text-primary fs-5 mb-4 mb-md-2">
-                  <del class="me-2 fs-6 text-neutral-500">NT$ 70</del>NT$ 65
-                </p>
-                <!-- </div> -->
+                <button
+                  type="button"
+                  class="btn border-0 p-0 btn-favorite"
+                  @click.prevent="toggleFavorite(product.id)"
+                  @mouseover="isFavoriteHover[product.id] = true"
+                  @mouseout="isFavoriteHover[product.id] = false"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary d-flex"
+                    :class="{
+                      'material-fill': isFavoriteHover[product.id],
+                    }"
+                  >
+                    favorite
+                  </span>
+                </button>
               </div>
-              <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
+              <h5 class="card-title fs-5 text-neutral-900 text-truncate">
+                {{ product.title }}
+              </h5>
+              <div class="d-flex">
+                <p
+                  v-if="product.price === product.origin_price"
+                  class="card-text text-primary fs-5 mb-6"
+                >
+                  NT$ {{ product.price }}
+                </p>
+                <div v-else>
+                  <p class="card-text text-primary fs-5 mb-6">
+                    NT$ {{ product.price }}
+                    <del class="fs-8 ms-1 text-neutral-500"
+                      >NT$ {{ product.origin_price }}</del
+                    >
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-primary w-100"
+                @click.prevent="addToCart(product.id)"
+              >
+                加入購物車
+              </button>
             </div>
           </div>
         </RouterLink>
-      </li>
-    </swiper-slide>
-
-    <swiper-slide>
-      <li class="col">
-        <div class="card box-shadow-3 hover-float-z">
-          <div class="position-relative">
-            <span
-              class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 position-absolute"
-              >本月限定</span
-            >
-          </div>
-          <div class="overflow-hidden">
-            <img
-              src="@/assets/images/products/dessert2.png"
-              class="object-cover w-100 card-img"
-              alt="甜點"
-            />
-          </div>
-          <div
-            class="card-body p-6 p-md-5 p-lg-6 d-flex flex-column justify-content-between"
-          >
-            <div>
-              <h5 class="card-title fs-5 text-neutral-900 text-truncate">
-                可麗露 焦糖原味
-              </h5>
-              <span
-                class="fs-8 my-4 my-md-1 py-1 px-2 bg-secondary text-white rounded-1 d-inline-block"
-                >可麗露</span
-              >
-              <!-- <div class="my-8 d-flex justify-content-between align-items-center"> -->
-              <p class="card-text text-primary fs-5 mb-4 mb-md-2">
-                <del class="me-2 fs-6 text-neutral-500">NT$ 70</del>NT$ 65
-              </p>
-              <!-- </div> -->
-            </div>
-            <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
-          </div>
-        </div>
-      </li>
-    </swiper-slide>
-
-    <swiper-slide>
-      <li class="col">
-        <div class="card box-shadow-3 hover-float-z">
-          <div class="position-relative">
-            <span
-              class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 position-absolute"
-              >本月限定</span
-            >
-          </div>
-          <div class="overflow-hidden">
-            <img
-              src="@/assets/images/products/dessert2.png"
-              class="object-cover w-100 card-img"
-              alt="甜點"
-            />
-          </div>
-          <div
-            class="card-body p-6 p-md-5 p-lg-6 d-flex flex-column justify-content-between"
-          >
-            <div>
-              <h5 class="card-title fs-5 text-neutral-900 text-truncate">
-                可麗露 焦糖原味
-              </h5>
-              <span
-                class="fs-8 my-4 my-md-1 py-1 px-2 bg-secondary text-white rounded-1 d-inline-block"
-                >可麗露</span
-              >
-              <!-- <div class="my-8 d-flex justify-content-between align-items-center"> -->
-              <p class="card-text text-primary fs-5 mb-4 mb-md-2">
-                <del class="me-2 fs-6 text-neutral-500">NT$ 70</del>NT$ 65
-              </p>
-              <!-- </div> -->
-            </div>
-            <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
-          </div>
-        </div>
-      </li>
-    </swiper-slide>
-
-    <swiper-slide>
-      <li class="col">
-        <div class="card box-shadow-3 hover-float-z">
-          <div class="position-relative">
-            <span
-              class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 position-absolute"
-              >本月限定</span
-            >
-          </div>
-          <div class="overflow-hidden">
-            <img
-              src="@/assets/images/products/dessert3.png"
-              class="object-cover w-100 card-img"
-              alt="甜點"
-            />
-          </div>
-          <div
-            class="card-body p-6 p-md-5 p-lg-6 d-flex flex-column justify-content-between"
-          >
-            <div>
-              <h5 class="card-title fs-5 text-neutral-900 text-truncate">
-                可麗露 焦糖原味
-              </h5>
-              <span
-                class="fs-8 my-4 my-md-1 py-1 px-2 bg-secondary text-white rounded-1 d-inline-block"
-                >可麗露</span
-              >
-              <!-- <div class="my-8 d-flex justify-content-between align-items-center"> -->
-              <p class="card-text text-primary fs-5 mb-4 mb-md-2">
-                <del class="me-2 fs-6 text-neutral-500">NT$ 70</del>NT$ 65
-              </p>
-              <!-- </div> -->
-            </div>
-            <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
-          </div>
-        </div>
-      </li>
-    </swiper-slide>
-
-    <swiper-slide>
-      <li class="col">
-        <div class="card box-shadow-3 hover-float-z">
-          <div class="position-relative">
-            <span
-              class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 position-absolute"
-              >本月限定</span
-            >
-          </div>
-          <div class="overflow-hidden">
-            <img
-              src="@/assets/images/products/dessert4.png"
-              class="object-cover w-100 card-img"
-              alt="甜點"
-            />
-          </div>
-          <div
-            class="card-body p-6 p-md-5 p-lg-6 d-flex flex-column justify-content-between"
-          >
-            <div>
-              <h5 class="card-title fs-5 text-neutral-900 text-truncate">
-                可麗露 焦糖原味
-              </h5>
-              <span
-                class="fs-8 my-4 my-md-1 py-1 px-2 bg-secondary text-white rounded-1 d-inline-block"
-                >可麗露</span
-              >
-              <!-- <div class="my-8 d-flex justify-content-between align-items-center"> -->
-              <p class="card-text text-primary fs-5 mb-4 mb-md-2">
-                <del class="me-2 fs-6 text-neutral-500">NT$ 70</del>NT$ 65
-              </p>
-              <!-- </div> -->
-            </div>
-            <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
-          </div>
-        </div>
-      </li>
+      </div>
     </swiper-slide>
   </swiper>
   <div class="swiper-pagination"></div>
@@ -229,8 +106,8 @@
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper";
-
-// Import Swiper styles
+import { mapActions } from "pinia";
+import useProductStore from "@/stores/useProductStore";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -239,10 +116,19 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  props: {
+    propsProducts: {
+      type: Array,
+    },
+  },
   data() {
     return {
       modules: [Pagination],
+      isFavoriteHover: {},
     };
+  },
+  methods: {
+    ...mapActions(useProductStore, ["addToCart"]),
   },
 };
 </script>

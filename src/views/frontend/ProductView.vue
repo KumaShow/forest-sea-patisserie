@@ -1,8 +1,3 @@
-<!-- 
-  TODO:
-    - 尺寸後台新增對應欄位
-      - 使用 a or btn 切換 select 選項，並active
--->
 <template>
   <main class="Product container py-11">
     <div class="row mb-10">
@@ -49,7 +44,7 @@
               </p>
 
               <ul>
-                <li class="d-flex align-items-center mb-7">
+                <!-- <li class="d-flex align-items-center mb-7">
                   <label class="fs-7 me-6">商品尺寸:</label>
                   <select name="" id="" class="visually-hidden">
                     <option value="5">5 吋</option>
@@ -63,7 +58,7 @@
                   <button class="btn btn-outline-gray-500 hover-text-white">
                     6 吋
                   </button>
-                </li>
+                </li> -->
                 <li class="d-flex align-items-center mb-7">
                   <label class="fs-7 me-6">建議售價:</label>
                   <span class="fs-4">${{ product.price }}</span>
@@ -131,7 +126,7 @@
     <!-- 推薦商品 -->
     <section class="">
       <h3 class="mb-8">推薦商品</h3>
-      <ProductsCarousel />
+      <ProductsCarousel :props-products="filterCategoryProducts" />
     </section>
   </main>
 </template>
@@ -151,16 +146,10 @@ export default {
   data() {
     return {
       qty: 1,
-      // tempProduct: {},
     };
   },
   computed: {
-    ...mapState(useProductStore, ["product"]),
-  },
-  watch: {
-    // tempProduct() {
-    //   this.tempProduct = { ...this.product };
-    // },
+    ...mapState(useProductStore, ["product", "filterCategoryProducts"]),
   },
   methods: {
     ...mapActions(useProductStore, [

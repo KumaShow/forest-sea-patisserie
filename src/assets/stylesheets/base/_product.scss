@@ -1,0 +1,40 @@
+.product-img {
+  position: relative;
+
+  &::after {
+    content: "查看商品";
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%); // hover 前的位置
+    text-align: center;
+    font-size: 1.7rem;
+    opacity: 0; // hover 前不可見
+    transition: all 0.4s;
+    backface-visibility: hidden;
+
+    @include respond-min(md) {
+      font-size: 24px;
+    }
+  }
+}
+
+.tag-limited {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.product-link:hover {
+  img {
+    transition: all 0.4s ease;
+    transform: scale(1.2);
+    filter: brightness(60%);
+  }
+  .product-img::after {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

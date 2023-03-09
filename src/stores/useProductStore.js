@@ -70,7 +70,6 @@ const useProductStore = defineStore("useProductStore", {
     // 更新選擇的類別
     setCategory(category = "") {
       this.category = category;
-      // console.log(this.category);
     },
 
     // 更新搜尋結果
@@ -122,6 +121,7 @@ const useProductStore = defineStore("useProductStore", {
       this.product = {};
       axios.get(url).then((res) => {
         this.product = res.data.product;
+        this.category = res.data.product.category;
         loadingState(false);
         // console.log("getProduct:", this.product);
       });
@@ -138,6 +138,16 @@ const useProductStore = defineStore("useProductStore", {
               item.category.includes(this.searchTerm)
             );
           });
+    },
+
+    // 篩選熱門 - 熱門商品
+    filterHotProducts() {
+      return this.productsAll.filter((item) => item.is_hot === 1);
+    },
+
+    // 篩選類別 - 推薦商品
+    filterCategoryProducts() {
+      return this.productsAll.filter((item) => item.category === this.category);
     },
   },
 });
