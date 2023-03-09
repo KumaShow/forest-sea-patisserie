@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import useStatusStore from "@/stores/useStatusStore";
+import useScrollStore from "@/stores/useScrollStore";
 import { mapState } from "pinia";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useStatusStore, ["scrollPosition"]),
+    ...mapState(useScrollStore, ["scrollPosition"]),
 
     scrollHandler() {
       return this.scrollPosition > 800;
