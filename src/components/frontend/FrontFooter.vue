@@ -1,7 +1,7 @@
 <template>
   <!-- 訂閱消息 & 導航 -->
   <section class="section-subscribe bg-primary-dark py-11 py-lg-16">
-    <div class="container">
+    <div class="container content">
       <div class="row">
         <!-- 訂閱訊息 -->
         <div class="col-lg-6 mb-11 mb-lg-0">
@@ -96,9 +96,24 @@
 
 <style lang="scss">
 .section-subscribe {
-  background-image: url("@/assets/images/subscribe.png");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.65;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url("@/assets/images/room.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(80%);
+  }
+  .content {
+    position: relative;
+  }
 }
 </style>
