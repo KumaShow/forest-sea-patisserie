@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
-import router from "../router/index";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useLoadingStore from "./useLoadingStore";
+// import useToastMessageStore from "./useToastMessageStore";
 
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { loadingState } = useLoadingStore();
+// const { pushMessage } = useToastMessageStore();
 
 const useCartStore = defineStore("useCartStore", {
   state: () => ({
@@ -23,7 +24,6 @@ const useCartStore = defineStore("useCartStore", {
         .then((res) => {
           this.cart = res.data.data;
           loadingState(false);
-          // console.log("cart:", this.cart);
         })
         .catch((err) => {
           loadingState(false);
@@ -82,10 +82,23 @@ const useCartStore = defineStore("useCartStore", {
 
       if (!item.qty || item.qty === "e") {
         cart.qty = 1;
-        alert("商品數量不得小於 1 個");
-      } else if (item.qty >= 20) {
-        cart.qty = 20;
-        alert("商品數量不得大於 20 個");
+        // alert("商品數量不得小於 1 個");
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "商品數量不得小於 1 個",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else if (item.qty >= 100) {
+        cart.qty = 100;
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "商品數量不得大於 100 個",
+          showConfirmButton: true,
+          timer: 2000,
+        });
       }
       this.loadingItem = item.id;
 
@@ -93,23 +106,18 @@ const useCartStore = defineStore("useCartStore", {
         .put(url, { data: cart })
         .then(() => {
           this.getCarts();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "數量已更新",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          // Swal.fire({
+          //   position: "center",
+          //   icon: "success",
+          //   title: "數量已更新",
+          //   showConfirmButton: false,
+          //   timer: 1500,
+          // });
           this.loadingItem = "";
         })
         .catch((err) => {
           alert(err);
         });
-    },
-
-    // 跳轉頁面到產品
-    linkToProducts() {
-      router.push({ name: "products" });
     },
   },
   getters: {},
