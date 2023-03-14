@@ -1,6 +1,3 @@
-<!-- 
-  TODO: 樣式微調
--->
 <template>
   <swiper
     :slidesPerView="1"
@@ -54,14 +51,16 @@
                 <button
                   type="button"
                   class="btn border-0 p-0 btn-favorite"
-                  @click.prevent="toggleFavorite(product.id)"
+                  @click.prevent="setFavorite(product.id)"
                   @mouseover="isFavoriteHover[product.id] = true"
                   @mouseout="isFavoriteHover[product.id] = false"
                 >
                   <span
                     class="material-symbols-outlined text-secondary d-flex"
                     :class="{
-                      'material-fill': isFavoriteHover[product.id],
+                      'material-fill':
+                        favorites.includes(product.id) ||
+                        isFavoriteHover[product.id],
                     }"
                   >
                     favorite
@@ -89,9 +88,22 @@
               </div>
               <button
                 type="button"
-                class="btn btn-outline-primary w-100"
-                @click.prevent="addToCart(product.id)"
+                class="btn btn-outline-primary rounded-1 w-100 d-flex justify-content-center align-items-center py-2"
+                @click.prevent="addToCart(product.id, qty)"
+                :disabled="loadingItem === product.id"
               >
+                <span
+                  v-show="loadingItem === product.id"
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  v-show="loadingItem !== product.id"
+                  class="material-symbols-outlined me-2"
+                >
+                  shopping_cart
+                </span>
                 加入購物車
               </button>
             </div>
@@ -106,7 +118,7 @@
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import useProductStore from "@/stores/useProductStore";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -127,8 +139,11 @@ export default {
       isFavoriteHover: {},
     };
   },
+  computed: {
+    ...mapState(useProductStore, ["loadingItem", "favorites"]),
+  },
   methods: {
-    ...mapActions(useProductStore, ["addToCart"]),
+    ...mapActions(useProductStore, ["addToCart", "setFavorite"]),
   },
 };
 </script>
