@@ -47,9 +47,6 @@ const routes = [
               name: "產品一覽",
               link: "products",
             },
-            // {
-            //   name: "單一產品",
-            // },
           ],
         },
       },
@@ -137,6 +134,17 @@ const routes = [
         path: "checkOrder",
         name: "checkOrder",
         component: () => import("@/views/frontend/CheckOrderView.vue"),
+        meta: {
+          breadcrumb: [
+            {
+              name: "首頁",
+              link: "home",
+            },
+            {
+              name: "購物車",
+            },
+          ],
+        },
       },
       {
         path: "checkPayment/:id",
@@ -147,11 +155,49 @@ const routes = [
             id: route.params.id,
           };
         },
+        meta: {
+          breadcrumb: [
+            {
+              name: "首頁",
+              link: "home",
+            },
+            {
+              name: "購物車",
+              link: "checkOrder",
+            },
+            {
+              name: "確認結帳",
+            },
+          ],
+        },
       },
       {
-        path: "checkOrderCompleted",
+        path: "checkOrderCompleted/:id",
         name: "checkOrderCompleted",
         component: () => import("@/views/frontend/CheckOrderCompletedView.vue"),
+        props: (route) => {
+          return {
+            id: route.params.id,
+          };
+        },
+        meta: {
+          breadcrumb: [
+            {
+              name: "首頁",
+              link: "home",
+            },
+            {
+              name: "購物車",
+              link: "checkOrder",
+            },
+            {
+              name: "確認結帳",
+            },
+            {
+              name: "訂單已成立",
+            },
+          ],
+        },
       },
     ],
   },
@@ -206,6 +252,15 @@ const router = createRouter({
 router.afterEach(() => {
   window.scrollTo(0, 0);
 });
+
+// const productStore = useProductStore();
+// router.beforeEach((to, from) => {
+//   console.log("to: ", to.name);
+//   console.log("from: ", from.name);
+//   if (to.name === "products" && from.name !== "product") {
+//     productStore.setCategory("");
+//   }
+// });
 
 // router.beforeEach((to, from) => {
 // const isInternalNavigation =
