@@ -13,7 +13,7 @@
           </h2>
           <RouterLink
             to="/products"
-            class="btn btn-outline-light hover-bg-secondary-200 px-6 px-md-10 py-2 py-md-4"
+            class="btn btn-outline-light hover-bg-secondary-200 px-6 px-md-10 py-2 py-md-4 rounded-1"
             >立即選購</RouterLink
           >
         </div>
@@ -116,7 +116,7 @@
       </div>
     </section>
     <!-- 實體店面 -->
-    <section class="section-store py-11 py-lg-16">
+    <section class="section-store bg-mask-texture py-11 py-lg-16">
       <div class="container">
         <div class="text-center mb-11 mb-lg-15">
           <h2 class="text-center font-serif">實體店面</h2>
@@ -125,14 +125,14 @@
         <div class="row align-items-center flex-row-reverse">
           <!-- 地圖 -->
           <div class="col-lg-6 mb-11 mb-lg-0">
-            <div class="p-4 p-mb-6 box-shadow-1">
+            <div class="p-4 p-mb-6 box-shadow-1 bg-white">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d918.220245848611!2d120.1999951301751!3d22.99140362892596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e767cad121e19%3A0x299a83f8a02bcdca!2zNzAw5Y-w54Gj5Y-w5Y2X5biC5Lit6KW_5Y2A5Y-L5oSb6KGXMTA16Jmf!5e0!3m2!1szh-TW!2ssg!4v1677846674578!5m2!1szh-TW!2ssg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1405.9057743738294!2d120.19924610619928!3d22.990990325090667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e77ddbb48abc9%3A0x3061313521f6ed6!2z5qOu5rW35omL5L2c55Sc6bueIEZPUkVTVCBTRUEgUEFUSVNTRVJJRQ!5e0!3m2!1szh-TW!2ssg!4v1678679733955!5m2!1szh-TW!2ssg"
+                class="w-100 store-map"
                 style="border: 0"
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                class="w-100 store-map"
               ></iframe>
             </div>
           </div>
@@ -155,7 +155,7 @@
                   <li
                     v-for="day in articleDayOff"
                     :key="day"
-                    class="me-5 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3"
+                    class="me-5 border border-secondary d-flex justify-content-center align-items-center rounded-1 text-secondary box-shadow-3 bg-white"
                     style="height: 32px; width: 32px"
                   >
                     {{ day }}
