@@ -54,19 +54,19 @@ export default {
 <style lang="scss">
 @import "bootstrap/scss/functions";
 @import "@/assets/stylesheets/helpers/variables";
+
 .page-link {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
   width: 40px;
+  background-color: transparent !important;
 }
-.page-link:hover {
-  background: inherit;
-}
+
 .page-item.active {
   .page-link {
-    background-color: inherit;
+    background-color: transparent;
     color: $secondary;
     position: relative;
     font-size: 18px;
