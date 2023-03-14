@@ -1,10 +1,11 @@
 <template>
   <div class="front-layout">
-    <FrontNavBar :is-mobile="isMobile" />
+    <FrontNavBar :is-mobile="isMobile" ref="header" />
     <BreadCrumb v-show="this.$route.path !== '/'" />
     <RouterView />
-    <ToolBox class="the-tool-box" />
+    <ToolBox class="the-tool-box d-none d-md-block" />
     <FrontFooter />
+    <TheToastMessage />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import FrontNavBar from "@/components/frontend/FrontNavBar.vue";
 import ToolBox from "@/components/frontend/ToolBox.vue";
 import FrontFooter from "@/components/frontend/FrontFooter.vue";
 import BreadCrumb from "@/components/frontend/BreadCrumb.vue";
+import TheToastMessage from "@/components/TheToastMessage.vue";
 
 export default {
   components: {
@@ -20,6 +22,7 @@ export default {
     ToolBox,
     FrontFooter,
     BreadCrumb,
+    TheToastMessage,
   },
   data() {
     return {
