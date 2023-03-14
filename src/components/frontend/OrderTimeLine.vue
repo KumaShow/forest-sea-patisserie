@@ -51,6 +51,9 @@ export default {
 </script>
 
 <style scope lang="scss">
+@import "bootstrap/scss/functions";
+@import "@/assets/stylesheets/helpers/variables.scss";
+
 .timeline {
   position: relative;
   &::after {
@@ -60,7 +63,7 @@ export default {
     left: 0;
     right: 0;
     height: 2px;
-    background-color: green;
+    background-color: $primary;
   }
   &-step-2 {
     position: relative;
@@ -71,7 +74,7 @@ export default {
       left: 0;
       right: 50%;
       height: 2px;
-      background-color: green;
+      background-color: $primary;
     }
     &::after {
       content: "";
@@ -80,7 +83,7 @@ export default {
       left: 50%;
       right: 0;
       height: 2px;
-      background-color: green;
+      background-color: $primary;
     }
   }
   &-step-3 {
@@ -92,13 +95,13 @@ export default {
       left: 0;
       right: 0;
       height: 2px;
-      background-color: green;
+      background-color: $primary;
     }
   }
 
   &-pointer {
     position: relative;
-    color: white;
+    color: $neutral-500;
     p {
       padding-top: 24px;
       margin-bottom: 0;
@@ -108,12 +111,12 @@ export default {
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 20px;
-      border: 1px solid gray;
+      transform: translate(-50%, -10%);
+      width: 25px;
+      height: 25px;
+      border: 3px solid gray;
       border-radius: 50%;
-      background-color: gray;
+      background-color: $neutral-700;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -130,11 +133,11 @@ export default {
       content: "3";
     }
     &.active {
-      color: green;
+      color: $primary;
       &::before {
         color: white;
-        background-color: green;
-        border-color: green;
+        background-color: $primary;
+        border-color: $primary;
       }
     }
   }
