@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="toast-container position-fixed top-0 end-0 p-3"
-    style="z-index: 1500"
-  >
+  <div class="toast-container p-3" style="z-index: 1500">
     <div
       class="toast show"
       :class="`toast${key}`"
@@ -43,3 +40,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.toast-container {
+  position: fixed;
+  top: 60px;
+  right: 0;
+}
+</style>
