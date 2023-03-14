@@ -68,15 +68,15 @@
             <!-- 網站連結 -->
             <ul class="d-flex justify-content-center justify-content-lg-end">
               <li class="me-7 me-lg-8">
-                <RouterLink to="products">商品一覽</RouterLink>
+                <RouterLink to="/products">商品一覽</RouterLink>
               </li>
               <li class="me-7 me-lg-8">
-                <RouterLink to="news">最新消息</RouterLink>
+                <RouterLink to="/news">最新消息</RouterLink>
               </li>
               <li class="me-7 me-lg-8">
-                <RouterLink to="about">關於我們</RouterLink>
+                <RouterLink to="/about">關於我們</RouterLink>
               </li>
-              <li><RouterLink to="faq">常見問題</RouterLink></li>
+              <li><RouterLink to="/faq">常見問題</RouterLink></li>
             </ul>
           </div>
         </div>
