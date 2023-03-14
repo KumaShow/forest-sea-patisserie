@@ -19,9 +19,11 @@
               <span>
                 {{ order?.user?.name }}
               </span>
-              <a :href="`mailto:${order?.user?.email}`" class="d-block">{{
-                order?.user?.email
-              }}</a>
+              <a
+                :href="`mailto:${order?.user?.email}`"
+                class="d-block link-dark"
+                >{{ order?.user?.email }}</a
+              >
             </div>
           </td>
           <td>
