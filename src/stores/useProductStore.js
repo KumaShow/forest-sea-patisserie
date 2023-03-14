@@ -21,6 +21,7 @@ const useProductStore = defineStore("useProductStore", {
     category: "",
     loadingItem: "",
     searchTerm: "",
+    favorites: [],
   }),
   actions: {
     // 取得所有產品含分頁資料
@@ -62,9 +63,14 @@ const useProductStore = defineStore("useProductStore", {
           this.categories = Array.from(
             new Set(this.productsAll.map((product) => product.category))
           );
-          // console.log(this.productsAll);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          pushMessage({
+            style: "danger",
+            title: "取得產品失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
+        });
     },
 
     // 更新選擇的類別
@@ -84,36 +90,28 @@ const useProductStore = defineStore("useProductStore", {
         product_id: id,
         qty: num,
       };
-      loadingState(true);
-      // console.log("url:", url);
-      // console.log("data:", data);
+      this.loadingItem = id;
 
       axios
         .post(url, { data })
-        .then((res) => {
-          // console.log(res.data);
+        .then(() => {
           getCarts();
-          loadingState(false);
-          // if (this.isShow) {
-          //   this.isShow = false;
-          //   loadingState(false);
-          // }
-          // this.pushMessage({
-          //   title: "已加入購物車",
-          // });
+          this.loadingItem = "";
+          pushMessage({
+            title: "已加入購物車",
+          });
         })
         .catch((err) => {
-          loadingState(false);
-          // pushMessage({
-          //   style: "danger",
-          //   title: "加入購物車失敗，請稍後再試",
-          //   content: `${err.response.data.message}`,
-          // });
-          console.log(err);
+          this.loadingItem = "";
+          pushMessage({
+            style: "danger",
+            title: "加入購物車失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
         });
     },
 
-    // // 取得單一產品資料
+    //  取得單一產品資料
     getProduct(productId) {
       const url = `${VITE_API}/api/${VITE_API_PATH}/product/${productId}`;
       loadingState(true);
@@ -123,8 +121,32 @@ const useProductStore = defineStore("useProductStore", {
         this.product = res.data.product;
         this.category = res.data.product.category;
         loadingState(false);
-        // console.log("getProduct:", this.product);
       });
+    },
+
+    // 加入、刪除最愛
+    setFavorite(id) {
+      if (this.favorites.includes(id)) {
+        const idx = this.favorites.findIndex((item) => item === id);
+        this.favorites.splice(idx, 1);
+        pushMessage({
+          title: "已刪除產品",
+        });
+      } else {
+        this.favorites.push(id);
+        pushMessage({
+          title: "已加入我的最愛",
+        });
+      }
+      const favoriteStr = JSON.stringify(this.favorites);
+      localStorage.setItem("favorites", "");
+      localStorage.setItem("favorites", favoriteStr);
+      this.getFavorites();
+    },
+
+    // 取得 localStorage favorites
+    getFavorites() {
+      this.favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     },
   },
   getters: {
@@ -148,6 +170,13 @@ const useProductStore = defineStore("useProductStore", {
     // 篩選類別 - 推薦商品
     filterCategoryProducts() {
       return this.productsAll.filter((item) => item.category === this.category);
+    },
+
+    // 篩選最愛的產品
+    filterFavorites() {
+      return this.productsAll.filter((item) =>
+        this.favorites.includes(item.id)
+      );
     },
   },
 });
