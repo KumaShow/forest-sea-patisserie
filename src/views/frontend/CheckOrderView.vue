@@ -100,7 +100,7 @@
                     </p>
                   </div>
                   <div v-else class="text-end">
-                    <div class="">
+                    <div>
                       <del class="fs-7 text-neutral-500"
                         >原價: NT$ {{ cart.total }}</del
                       >
@@ -193,7 +193,6 @@ export default {
         this.$http
           .post(url, data)
           .then((res) => {
-            console.log(res.data.data.final_total);
             this.final_total = res.data.data.final_total;
             this.getCarts();
             this.pushMessage({
