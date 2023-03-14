@@ -157,17 +157,33 @@
                 v-show="!isCartEmpty"
               >
                 {{ cart.carts.length }}
-                <span class="visually-hidden">unread messages</span>
+                <span class="visually-hidden">
+                  購物車產品數:{{ cart.carts.length }}
+                </span>
               </span>
             </button>
           </li>
           <!-- TODO: 使用 localStorage 判斷最愛內是否有商品 -->
           <!-- 我的最愛按鈕 -->
           <li class="d-none d-md-block">
-            <RouterLink to="/favorite" class="bg-transparent text-white d-flex">
-              <span class="material-symbols-outlined hover-text-secondary-200">
-                <!-- :class="{ 'material-fill': isFavorite }" -->
+            <RouterLink
+              to="/favorite"
+              class="bg-transparent text-white d-flex position-relative"
+            >
+              <span
+                class="material-symbols-outlined hover-text-secondary-200"
+                :class="{ 'material-fill': favorites.length }"
+              >
                 favorite
+              </span>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                v-show="favorites.length"
+              >
+                {{ favorites.length }}
+                <span class="visually-hidden">
+                  我的最愛數量:{{ favorites.length }}
+                </span>
               </span>
             </RouterLink>
           </li>
@@ -230,7 +246,7 @@ export default {
   },
   computed: {
     ...mapState(useCartStore, ["cart"]),
-    ...mapState(useProductStore, ["productsAll"]),
+    ...mapState(useProductStore, ["productsAll", "favorites"]),
     ...mapState(useScrollStore, ["scrollPosition", "isNewsPosition"]),
   },
   watch: {
