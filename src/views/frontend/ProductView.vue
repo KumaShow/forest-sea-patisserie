@@ -15,7 +15,7 @@
                 <div>
                   <img
                     v-lazy="product.imageUrl"
-                    alt=""
+                    :alt="product.title"
                     class="w-100 object-cover mb-7"
                     style="height: 400px"
                   />
@@ -45,21 +45,6 @@
                 </p>
 
                 <ul>
-                  <!-- <li class="d-flex align-items-center mb-7">
-                  <label class="fs-7 me-6">商品尺寸:</label>
-                  <select name="" id="" class="visually-hidden">
-                    <option value="5">5 吋</option>
-                    <option value="6">6 吋</option>
-                  </select>
-                  <button
-                    class="btn btn-outline-gray-500 hover-text-white me-6"
-                  >
-                    5 吋
-                  </button>
-                  <button class="btn btn-outline-gray-500 hover-text-white">
-                    6 吋
-                  </button>
-                </li> -->
                   <li class="d-flex align-items-center mb-7">
                     <label class="fs-7 me-6">建議售價:</label>
                     <span class="fs-4">${{ product.price }}</span>
@@ -147,7 +132,6 @@
         <ProductsCarousel :props-products="filterCategoryProducts" />
       </section>
     </main>
-    <TheLoading />
   </div>
 </template>
 
@@ -155,7 +139,6 @@
 import { mapState, mapActions } from "pinia";
 import useProductStore from "@/stores/useProductStore";
 import useLoadingStore from "@/stores/useLoadingStore";
-import TheLoading from "@/components/TheLoading.vue";
 import AsideProductMenu from "@/components/frontend/AsideProductMenu.vue";
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 
@@ -163,7 +146,6 @@ export default {
   components: {
     AsideProductMenu,
     ProductsCarousel,
-    TheLoading,
   },
   props: ["id"],
   data() {

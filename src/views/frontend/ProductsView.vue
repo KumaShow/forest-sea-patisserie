@@ -109,7 +109,6 @@
       />
     </main>
     <RouterView />
-    <TheLoading />
   </div>
 </template>
 
@@ -117,14 +116,12 @@
 import { mapState, mapActions } from "pinia";
 import useProductStore from "@/stores/useProductStore";
 import ThePagination from "@/components/ThePagination.vue";
-import TheLoading from "@/components/TheLoading.vue";
 import AsideProductMenu from "@/components/frontend/AsideProductMenu.vue";
 
 export default {
   components: {
     ThePagination,
     AsideProductMenu,
-    TheLoading,
   },
   data() {
     return {

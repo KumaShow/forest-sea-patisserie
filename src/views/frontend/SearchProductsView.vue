@@ -70,19 +70,16 @@
     </div>
   </main>
   <RouterView />
-  <TheLoading />
 </template>
 
 <script>
 import { mapState, mapActions } from "pinia";
 import useProductStore from "@/stores/useProductStore";
-import TheLoading from "@/components/TheLoading.vue";
 import AsideProductMenu from "@/components/frontend/AsideProductMenu.vue";
 
 export default {
   components: {
     AsideProductMenu,
-    TheLoading,
   },
   computed: {
     ...mapState(useProductStore, [

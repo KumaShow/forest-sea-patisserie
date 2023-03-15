@@ -6,6 +6,7 @@
     <ToolBox class="the-tool-box d-none d-md-block" />
     <FrontFooter />
     <TheToastMessage />
+    <TheLoading />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import ToolBox from "@/components/frontend/ToolBox.vue";
 import FrontFooter from "@/components/frontend/FrontFooter.vue";
 import BreadCrumb from "@/components/frontend/BreadCrumb.vue";
 import TheToastMessage from "@/components/TheToastMessage.vue";
+import TheLoading from "@/components/TheLoading.vue";
 
 export default {
   components: {
@@ -23,6 +25,7 @@ export default {
     FrontFooter,
     BreadCrumb,
     TheToastMessage,
+    TheLoading,
   },
   data() {
     return {
