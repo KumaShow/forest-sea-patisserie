@@ -18,6 +18,12 @@
               {{ product.title }}
             </a>
           </li>
+          <!-- 活動文章頁面顯示標題 -->
+          <li class="breadcrumb-item" v-if="this.$route.name === 'article'">
+            <a href="#" class="text-gray-500" @click.prevent>
+              {{ article.title }}
+            </a>
+          </li>
         </ol>
       </nav>
     </div>
@@ -25,30 +31,32 @@
 </template>
 
 <script>
-import useProductStore from "@/stores/useProductStore";
 import { mapActions, mapState } from "pinia";
+import useProductStore from "@/stores/useProductStore";
+import useArticleStore from "@/stores/useArticleStore";
 
 export default {
   data() {
     return {
-      pathMap: [
-        {
-          name: "首頁",
-          link: "home",
-        },
-        {
-          name: "產品一覽",
-          link: "products",
-        },
-        {
-          name: "",
-        },
-      ],
+      // pathMap: [
+      //   {
+      //     name: "首頁",
+      //     link: "home",
+      //   },
+      //   {
+      //     name: "產品一覽",
+      //     link: "products",
+      //   },
+      //   {
+      //     name: "",
+      //   },
+      // ],
       breadcrumbList: [],
     };
   },
   computed: {
     ...mapState(useProductStore, ["product"]),
+    ...mapState(useArticleStore, ["article"]),
   },
   watch: {
     $route() {
@@ -57,6 +65,7 @@ export default {
   },
   methods: {
     ...mapActions(useProductStore, ["getProduct"]),
+    ...mapActions(useArticleStore, ["getArticle"]),
   },
   mounted() {
     this.breadcrumbList = this.$route.meta.breadcrumb;
