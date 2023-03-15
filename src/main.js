@@ -68,7 +68,8 @@ app.use(VueLazyload, {
   loading: loadImg,
   error: loadImg,
   attempt: 3,
-  throttleWait: 500,
+  preLoad: 1.5,
+  throttleWait: 300,
 });
 
 app.mount("#app");
