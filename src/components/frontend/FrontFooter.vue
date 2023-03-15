@@ -11,16 +11,18 @@
           <p class="text-white text-center text-lg-start opacity-80 mb-8">
             立即訂閱，取得最新折扣優惠碼
           </p>
-          <div class="d-flex align-items-center justify-content-center">
+          <div
+            class="d-flex align-items-center justify-content-center justify-content-lg-start"
+          >
             <input
               type="email"
-              class="rounded-1 p-4 me-2 flex-md-fill w-auto"
+              class="rounded-1 p-4 me-2 w-75 w-sm-50"
               placeholder="請輸入信箱"
             />
             <div class="w-auto">
               <button
                 type="button"
-                class="btn btn-secondary rounded-1 py-4 px-sm-10 text-white fw-semibold"
+                class="btn btn-secondary rounded-1 py-4 px-6 px-sm-10 text-white fw-semibold"
               >
                 訂閱
               </button>
