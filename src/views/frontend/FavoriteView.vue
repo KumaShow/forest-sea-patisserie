@@ -104,20 +104,17 @@
         <ProductsCarousel :props-products="filterHotProducts" />
       </section>
     </main>
-    <TheToastMessage />
   </div>
 </template>
 
 <script>
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
-import TheToastMessage from "@/components/TheToastMessage.vue";
 import useProductStore from "@/stores/useProductStore";
 import { mapState, mapActions } from "pinia";
 
 export default {
   components: {
     ProductsCarousel,
-    TheToastMessage,
   },
   data() {
     return {
