@@ -15,8 +15,8 @@
               <table class="table align-middle bg-white border">
                 <thead>
                   <tr>
-                    <th width="20%"></th>
-                    <th width="35%">產品資料</th>
+                    <th width="20%">產品資料</th>
+                    <th width="35%"></th>
                     <th width="22%">數量</th>
                     <th width="20%" class="text-center">單價</th>
                     <th width="3%"></th>
@@ -72,27 +72,31 @@
               </table>
               <div class="mt-md-9 row align-items-center">
                 <!-- 優惠碼 -->
-                <div class="col-md-8 mb-4 mb-lg-0">
-                  <div class="input-group align-items-center">
-                    <div class="me-2 flex-fill flex-md-grow-0">
+                <div class="col-sm-8 col-md-8 mb-4 mb-lg-0">
+                  <div
+                    class="input-group align-items-center justify-content-between flex-nowrap"
+                  >
+                    <div class="me-2 col-8">
                       <input
                         type="text"
                         v-model="couponCode"
-                        class="form-control rounded-1 p-2"
+                        class="form-control rounded-1 p-2 flex-sm-grow-0"
                         placeholder="請輸入優惠碼"
                       />
                     </div>
-                    <button
-                      type="button"
-                      class="btn btn-primary rounded-1 py-2 px-10"
-                      @click="postCoupon"
-                    >
-                      套用
-                    </button>
+                    <div class="col-4">
+                      <button
+                        type="button"
+                        class="btn btn-primary px-6 px-md-10 py-2 rounded-1"
+                        @click="postCoupon"
+                      >
+                        套用
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <!-- 總金額 -->
-                <div class="col-md-4">
+                <div class="col-sm-4 col-md-4">
                   <div v-if="cart.total === cart.final_total" class="text-end">
                     <p class="fs-4 fw-bold">
                       總計:
@@ -105,7 +109,7 @@
                         >原價: NT$ {{ cart.total }}</del
                       >
                       <p class="text-primary fs-5 fw-bold">
-                        折扣後: NT$ {{ countFinalTotal }}
+                        折扣後: NT$ {{ Math.round(cart.final_total) }}
                       </p>
                     </div>
                   </div>
@@ -161,7 +165,7 @@ export default {
     return {
       step: 1,
       couponCode: "",
-      final_total: null,
+      final_total: 0,
     };
   },
   computed: {
@@ -169,9 +173,12 @@ export default {
     ...mapState(useProductStore, ["filterHotProducts"]),
     ...mapState(useLoadingStore, ["loadingItem"]),
 
-    countFinalTotal() {
-      return Math.round(this.final_total);
-    },
+    // countFinalTotal() {
+    //   if (this.final_total > 0) {
+    //     return Math.round(this.final_total);
+    //   }
+    //   return 0;
+    // },
   },
   methods: {
     ...mapActions(useCartStore, [
@@ -214,5 +221,4 @@ export default {
   },
 };
 </script>
-
 <!-- TODO: 手機 touch 無法加減數量 -->
