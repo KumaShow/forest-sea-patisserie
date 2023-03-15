@@ -39,7 +39,7 @@
             type="button"
             class="btn btn-outline-secondary"
             data-bs-dismiss="offcanvas"
-            @click="linkToProducts"
+            @click="$router.push('/products')"
           >
             找甜點去
           </button>
@@ -125,7 +125,6 @@ export default {
       "getCarts",
       "clearAllCarts",
       "deleteCartItem",
-      "linkToProducts",
     ]),
 
     openDeleteModal(state, item) {
