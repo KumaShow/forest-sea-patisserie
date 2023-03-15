@@ -1,6 +1,8 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import useToastMessageStore from "./useToastMessageStore";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
+const { pushMessage } = useToastMessageStore();
 
 const useOrderStore = defineStore("useOrderStore", {
   state: () => ({
@@ -24,11 +26,13 @@ const useOrderStore = defineStore("useOrderStore", {
         .then((res) => {
           this.order = "";
           this.order = res.data.order;
-          // console.log(res);
-          // console.log("訂單資料:", this.order);
         })
         .catch((err) => {
-          console.log(err);
+          pushMessage({
+            style: "danger",
+            title: "取得訂單失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
         });
     },
   },
