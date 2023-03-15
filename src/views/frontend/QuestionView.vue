@@ -1,6 +1,6 @@
 <template>
   <div class="bg-mask-texture">
-    <main class="faq container py-11 main-height">
+    <main class="container py-11 main-height">
       <h2 class="text-center mb-10 font-serif">常見問題</h2>
       <div class="row justify-content-center">
         <div class="accordion rounded-1 mb-10 col-md-10" id="accordionQA">
