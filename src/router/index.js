@@ -67,6 +67,31 @@ const routes = [
         },
       },
       {
+        path: "article/:id",
+        name: "article",
+        component: () => import("@/views/frontend/ArticleView.vue"),
+        props: (route) => {
+          return {
+            id: route.params.id,
+          };
+        },
+        meta: {
+          breadcrumb: [
+            {
+              name: "首頁",
+              link: "home",
+            },
+            {
+              name: "最新消息",
+              link: "news",
+            },
+            // {
+            //   name: "最新消息",
+            // },
+          ],
+        },
+      },
+      {
         path: "about",
         name: "about",
         component: () => import("@/views/frontend/AboutView.vue"),
