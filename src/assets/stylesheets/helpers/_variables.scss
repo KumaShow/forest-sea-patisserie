@@ -666,7 +666,7 @@ $headings-font-family: null !default;
 $headings-font-style: null !default;
 $headings-font-weight: 500 !default;
 $headings-line-height: 1.2 !default;
-$headings-color: null !default;
+$headings-color: $neutral-900;//null !default;
 // scss-docs-end headings-variables
 
 // scss-docs-start display-headings
