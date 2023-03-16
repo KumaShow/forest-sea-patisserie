@@ -1,6 +1,6 @@
 <template>
-  <div class="">
+  <main class="">
     <h2 class="text-center">404</h2>
     <p>找不到網頁!</p>
-  </div>
+  </main>
 </template>
