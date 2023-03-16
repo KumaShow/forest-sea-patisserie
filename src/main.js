@@ -4,6 +4,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import Aos from "aos";
 import { SetupCalendar } from "v-calendar";
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
 import {
@@ -25,6 +26,8 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import "aos/dist/aos.css";
+
 import "v-calendar/dist/style.css";
 import "./assets/stylesheets/main.scss";
 
@@ -46,8 +49,13 @@ configure({
 
 // 設定預設語系
 setLocale("zh_TW");
-
+// font-awesome
 library.add(faFacebook, faLine, faInstagram);
+// aos
+Aos.init({
+  duration: 1000,
+  anchorPlacement: "center-bottom",
+});
 
 const app = createApp(App);
 
