@@ -84,20 +84,28 @@
                 >最新消息</RouterLink
               >
             </li>
-            <li class="nav-item me-8 border-bottom border-bottom-lg-0">
+            <!-- <li class="nav-item me-8 border-bottom border-bottom-lg-0">
               <RouterLink
                 to="/about"
                 class="py-6 p-lg-2 d-block d-lg-inline fs-5 fs-lg-7"
                 exact-active-class="link-active"
                 >關於我們</RouterLink
               >
-            </li>
-            <li class="nav-item me-8">
+            </li> -->
+            <li class="nav-item me-8 border-bottom border-bottom-lg-0">
               <RouterLink
                 to="/faq"
                 class="py-6 p-lg-2 d-block d-lg-inline fs-5 fs-lg-7"
                 exact-active-class="link-active"
                 >常見問題</RouterLink
+              >
+            </li>
+            <li class="nav-item me-8">
+              <RouterLink
+                to="/favorite"
+                class="py-6 p-lg-2 d-block d-lg-inline fs-5 fs-lg-7"
+                exact-active-class="link-active"
+                >我的最愛</RouterLink
               >
             </li>
           </ul>
@@ -163,7 +171,6 @@
               </span>
             </button>
           </li>
-          <!-- TODO: 使用 localStorage 判斷最愛內是否有商品 -->
           <!-- 我的最愛按鈕 -->
           <li class="d-none d-md-block">
             <RouterLink
