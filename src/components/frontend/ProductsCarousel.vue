@@ -2,6 +2,8 @@
   <swiper
     :slidesPerView="1"
     :spaceBetween="10"
+    :loop="true"
+    :autoplay="{ delay: 3000 }"
     :pagination="{
       clickable: true,
       el: '.swiper-pagination',
@@ -112,12 +114,12 @@
       </div>
     </swiper-slide>
   </swiper>
-  <div class="swiper-pagination"></div>
+  <div v-if="$route.name !== 'home'" class="swiper-pagination"></div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { mapActions, mapState } from "pinia";
 import useProductStore from "@/stores/useProductStore";
 import "swiper/css";
@@ -135,7 +137,7 @@ export default {
   },
   data() {
     return {
-      modules: [Pagination],
+      modules: [Pagination, Autoplay],
       isFavoriteHover: {},
     };
   },
