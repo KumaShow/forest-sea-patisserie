@@ -11,9 +11,9 @@ const useLoadingStore = defineStore("useLoadingStore", {
       this.isLoading = boolean;
     },
 
-    onCancel() {
-      console.log("User cancelled the loader.");
-    },
+    // onCancel() {
+    //   console.log("User cancelled the loader.");
+    // },
   },
 });
 
