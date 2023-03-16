@@ -221,4 +221,3 @@ export default {
   },
 };
 </script>
-<!-- TODO: 手機 touch 無法加減數量 -->

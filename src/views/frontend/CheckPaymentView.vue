@@ -169,5 +169,3 @@ export default {
   },
 };
 </script>
-
-<!-- TODO: 付款成功取得當下時間，建立付款時間 -->
