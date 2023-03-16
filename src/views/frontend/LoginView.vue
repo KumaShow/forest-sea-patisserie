@@ -1,10 +1,10 @@
 <template>
   <FrontNavBar />
 
-  <div
+  <main
     class="login d-flex justify-content-center align-items-center position-relative"
   >
-    <div class="w-25">
+    <div class="col-8 col-md-6">
       <h1 class="h3 mb-3 font-weight-normal text-center">登入後台</h1>
       <form id="form" class="form-signin" @submit.prevent="signIn">
         <div class="form-floating mb-3">
@@ -36,7 +36,7 @@
       </form>
     </div>
     <TheToastMessage />
-  </div>
+  </main>
 </template>
 
 <script>
