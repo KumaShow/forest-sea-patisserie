@@ -1,9 +1,18 @@
 <template>
-  <div class="About">
-    <h2 class="text-center py-6 font-serif">關於我們</h2>
+  <div class="About container py-11 main-height">
+    <h2 class="text-center mb-10 font-serif">關於我們</h2>
   </div>
 </template>
 
-<script></script>
-
-<style lang="scss" scoped></style>
+<script>
+export default {
+  components: {},
+  data() {
+    return {
+      date: new Date(),
+    };
+  },
+  computed: {},
+  methods: {},
+};
+</script>
