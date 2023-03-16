@@ -2,11 +2,11 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useLoadingStore from "./useLoadingStore";
-// import useToastMessageStore from "./useToastMessageStore";
+import useToastMessageStore from "./useToastMessageStore";
 
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { loadingState } = useLoadingStore();
-// const { pushMessage } = useToastMessageStore();
+const { pushMessage } = useToastMessageStore();
 
 const useCartStore = defineStore("useCartStore", {
   state: () => ({
@@ -27,7 +27,11 @@ const useCartStore = defineStore("useCartStore", {
         })
         .catch((err) => {
           loadingState(false);
-          alert(err);
+          pushMessage({
+            style: "danger",
+            title: "取得購物車資料失敗",
+            content: `${err.response.data.message}`,
+          });
         });
     },
 
@@ -47,7 +51,11 @@ const useCartStore = defineStore("useCartStore", {
           this.getCarts();
         })
         .catch((err) => {
-          alert(err);
+          pushMessage({
+            style: "danger",
+            title: "刪除產品失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
         });
     },
 
@@ -68,7 +76,11 @@ const useCartStore = defineStore("useCartStore", {
           });
         })
         .catch((err) => {
-          alert(err);
+          pushMessage({
+            style: "danger",
+            title: "刪除產品失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
         });
     },
 
@@ -106,21 +118,21 @@ const useCartStore = defineStore("useCartStore", {
         .put(url, { data: cart })
         .then(() => {
           this.getCarts();
-          // Swal.fire({
-          //   position: "center",
-          //   icon: "success",
-          //   title: "數量已更新",
-          //   showConfirmButton: false,
-          //   timer: 1500,
-          // });
+          pushMessage({
+            style: "success",
+            title: "產品數量更新成功",
+          });
           this.loadingItem = "";
         })
         .catch((err) => {
-          alert(err);
+          pushMessage({
+            style: "danger",
+            title: "產品數量更新失敗",
+            content: `${err.response.data.message}`,
+          });
         });
     },
   },
-  getters: {},
 });
 
 export default useCartStore;
