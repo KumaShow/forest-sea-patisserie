@@ -40,7 +40,7 @@ const useProductStore = defineStore("useProductStore", {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
           loadingState(false);
-          // console.log(res);
+          window.scrollTo(0, 0);
         })
         .catch((err) => {
           loadingState(false);
