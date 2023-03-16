@@ -38,19 +38,6 @@ import useArticleStore from "@/stores/useArticleStore";
 export default {
   data() {
     return {
-      // pathMap: [
-      //   {
-      //     name: "首頁",
-      //     link: "home",
-      //   },
-      //   {
-      //     name: "產品一覽",
-      //     link: "products",
-      //   },
-      //   {
-      //     name: "",
-      //   },
-      // ],
       breadcrumbList: [],
     };
   },
