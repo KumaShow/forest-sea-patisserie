@@ -28,7 +28,7 @@
                 :src="article.image"
                 :alt="article.title"
                 class="img-fluid d-block object-cover w-100"
-                style="height: 350px"
+                style="aspect-ratio: 4/3"
               />
             </figure>
             <!-- 文章內容 -->
@@ -38,7 +38,7 @@
             <button
               type="button"
               @click="$router.go(-1)"
-              class="btn btn-primary"
+              class="btn btn-primary px-6 px-md-10 py-2 py-md-4 rounded-1"
             >
               返回
             </button>
