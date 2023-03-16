@@ -245,6 +245,7 @@ export default {
         isDayOff: false,
         tag: [""],
         dayOff: [],
+        content: "",
       },
       create_at: "",
       editor: ClassicEditor,
