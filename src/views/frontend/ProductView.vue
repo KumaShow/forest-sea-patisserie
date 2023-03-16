@@ -3,7 +3,7 @@
     <main class="Product container py-11">
       <div class="row mb-10">
         <!-- 側邊產品類別選單 -->
-        <AsideProductMenu class="col-md-3" />
+        <AsideProductMenu class="col-md-3 d-none d-md-block" />
         <!-- 單一產品內容 -->
         <main class="col-md-9">
           <div class="container">
@@ -168,9 +168,6 @@ export default {
       if (this.$route.name === "product") {
         this.getProduct(this.$route.params.id);
       }
-    },
-    loadingState() {
-      console.log("loading: ", this.loadingState);
     },
   },
   methods: {
