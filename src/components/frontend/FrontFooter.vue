@@ -11,23 +11,34 @@
           <p class="text-white text-center text-lg-start opacity-80 mb-8">
             立即訂閱，取得最新折扣優惠碼
           </p>
-          <div
+          <form
+            @submit.prevent="subscribe"
+            ref="form"
             class="d-flex align-items-center justify-content-center justify-content-lg-start"
           >
             <input
               type="email"
-              class="rounded-1 p-4 me-2 w-75 w-sm-50"
+              class="rounded-1 p-4 me-2 w-75 w-sm-50 form-control"
               placeholder="請輸入信箱"
+              v-model="email"
+              required
             />
             <div class="w-auto">
               <button
-                type="button"
-                class="btn btn-secondary rounded-1 py-4 px-6 px-sm-10 text-white fw-semibold"
+                type="submit"
+                class="btn btn-secondary d-flex align-items-center rounded-1 py-4 px-6 px-sm-10 text-white fw-semibold"
+                :disabled="isLoading"
               >
+                <span
+                  v-show="isLoading"
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
                 訂閱
               </button>
             </div>
-          </div>
+          </form>
         </div>
         <!-- 導航連結 -->
         <div class="col-lg-6 text-center text-lg-end">
@@ -76,7 +87,7 @@
                 <RouterLink to="/news">最新消息</RouterLink>
               </li>
               <li class="me-7 me-lg-8">
-                <RouterLink to="/about">關於我們</RouterLink>
+                <RouterLink to="" @click.prevent>關於我們</RouterLink>
               </li>
               <li><RouterLink to="/faq">常見問題</RouterLink></li>
             </ul>
@@ -95,6 +106,38 @@
     <p class="text-white-70 fs-9">森海 © 2022 Copyright | made by Benson.</p>
   </footer>
 </template>
+
+<script>
+import Swal from "sweetalert2";
+
+export default {
+  data() {
+    return {
+      email: "",
+      coupon: "coupon2023",
+      isLoading: false,
+    };
+  },
+  methods: {
+    subscribe() {
+      this.isLoading = true;
+      this.email = "";
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "已成功訂閱",
+        text: `恭喜獲得優惠碼: ${this.coupon}`,
+        confirmButtonColor: "#095959",
+        showConfirmButton: true,
+        allowOutsideClick: true,
+      });
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 .section-subscribe {
