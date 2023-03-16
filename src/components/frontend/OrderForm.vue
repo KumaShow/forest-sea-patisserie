@@ -82,7 +82,7 @@
     <div class="text-end">
       <button
         type="submit"
-        class="btn btn-danger"
+        class="btn btn-primary"
         :disabled="!cart.carts.length"
       >
         送出訂單
@@ -94,7 +94,8 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import useCartStore from "@/stores/useCartStore";
-import Swal from "sweetalert2";
+import useToastMessageStore from "@/stores/useToastMessageStore";
+const { VITE_API, VITE_API_PATH } = import.meta.env;
 
 export default {
   data() {
@@ -114,19 +115,13 @@ export default {
   computed: {
     ...mapState(useCartStore, ["cart"]),
   },
-  // watch: {
-  //   isSubmitOrder() {
-  //     this.$router.push({ name: "checkPayment" });
-  //   },
-  // },
   methods: {
     ...mapActions(useCartStore, ["getCarts"]),
+    ...mapActions(useToastMessageStore, ["pushMessage"]),
 
     // 提交訂單
     submitOrder() {
-      const url = `${import.meta.env.VITE_API}/api/${
-        import.meta.env.VITE_API_PATH
-      }/order`;
+      const url = `${VITE_API}/api/${VITE_API_PATH}/order`;
       const data = this.order;
 
       if (this.cart?.carts?.length) {
@@ -134,14 +129,6 @@ export default {
           .post(url, { data })
           .then((res) => {
             this.getCarts();
-            // Swal.fire({
-            //   position: "center",
-            //   icon: "success",
-            //   title: "訂單已送出成功",
-            //   showConfirmButton: false,
-            //   allowOutsideClick: false,
-            //   timer: 1500,
-            // });
             this.$refs.form.resetForm();
             this.order.message = "";
             this.orderId = res.data.orderId;
@@ -151,10 +138,17 @@ export default {
             });
           })
           .catch((err) => {
-            alert(err.response);
+            this.pushMessage({
+              style: "danger",
+              title: "發送訂單失敗",
+              content: `${err.response.data.message}`,
+            });
           });
       } else {
-        alert("請先加入商品才能送出訂單!");
+        this.pushMessage({
+          style: "danger",
+          title: "請先加入商品才能送出訂單!",
+        });
       }
     },
 
