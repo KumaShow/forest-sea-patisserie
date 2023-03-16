@@ -96,10 +96,10 @@ export default {
 }
 .article-link {
   h3 {
-    transition: all 0.2s ease-out;
+    transition: all 0.3s ease-out;
   }
   img {
-    transition: transform 0.2s ease-out;
+    transition: transform 0.3s ease-out;
   }
 }
 </style>
