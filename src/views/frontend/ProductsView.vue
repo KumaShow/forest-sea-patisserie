@@ -3,14 +3,16 @@
     <main class="container py-11 main-height">
       <div class="row">
         <!-- 側邊產品類別選單 -->
-        <AsideProductMenu class="col-md-3 d-none d-md-block" />
+        <AsideProductMenu class="col-md-3 mb-10" />
         <main class="col-md-9">
           <div class="container">
             <h2 class="mb-9 font-serif text-center text-md-start">
               {{ category ? category : "全部商品" }}
             </h2>
-            <ul class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-8">
-              <li class="col" v-for="product in products" :key="product.id">
+            <ul
+              class="row justify-content-center justify-content-md-start row-cols-1 row-cols-md-2 row-cols-lg-3 g-8"
+            >
+              <li class="col-10" v-for="product in products" :key="product.id">
                 <RouterLink :to="`/product/${product.id}`" class="product-link">
                   <div class="card hover-shadow box-shadow-3">
                     <div class="overflow-hidden product-img">
