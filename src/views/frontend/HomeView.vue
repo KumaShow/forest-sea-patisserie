@@ -1,10 +1,9 @@
-<!-- TODO: 圖片壓縮 -->
 <template>
   <main v-if="this.$route.path === '/'">
     <!-- banner -->
     <section class="section-banner">
       <div class="section-banner-content">
-        <div class="text-center">
+        <div class="text-center" data-aos="fade-up">
           <h2 class="fs-3 fs-md-64 font-serif text-white mb-2">
             穿梭於森林、悠遊於深海
           </h2>
@@ -28,96 +27,24 @@
       </div>
     </section>
     <!-- 最新消息 -->
-    <section
-      class="section-news bg-primary-dark py-11 py-lg-16"
-      ref="sectionNews"
-    >
-      <div class="container">
-        <div class="news-content row">
-          <!-- 圖片 -->
-          <div class="col-lg-6 mb-8 mb-md-0">
-            <div class="text-center mb-11 d-lg-none">
-              <h2 class="font-serif text-white">最新消息</h2>
-              <img src="@/assets/images/header_line.svg" alt="文章圖片" />
-            </div>
-            <div class="p-6 bg-white overflow-hidden news-img">
-              <img
-                class="w-100 object-cover"
-                src="@/assets/images/news.png"
-                alt="最新消息圖片"
-              />
-            </div>
-          </div>
-          <!-- 文章列表 -->
-          <div class="col-lg-6 text-white">
-            <div class="text-center d-none d-lg-block mb-10 my-md-8 mb-lg-10">
-              <h2 class="font-serif">最新消息</h2>
-              <img src="@/assets/images/header_line.svg" alt="" />
-            </div>
-            <ul class="px-md-9">
-              <li class="py-9 border-white border-bottom border-opacity-50">
-                <div class="d-flex align-items-center mb-2">
-                  <span class="fs-8 py-1 px-2 me-6 bg-secondary rounded-1"
-                    >本月限定</span
-                  >
-                  <p class="text-white text-opacity-80">12月 5日 2022</p>
-                </div>
-                <h3 class="text-truncate fs-5 fs-md-4">
-                  <a href="#!">2022聖誕禮盒預約活動開始啦！</a>
-                </h3>
-              </li>
-
-              <li class="py-9 border-white border-bottom border-opacity-50">
-                <div class="d-flex align-items-center mb-2">
-                  <span class="fs-8 py-1 px-2 me-6 bg-secondary rounded-1"
-                    >活動</span
-                  >
-                  <p class="text-white text-opacity-80">12月 5日 2022</p>
-                </div>
-                <h3 class="text-truncate fs-4">
-                  <a href="#!">森海在本月開始會陸續推出每月限定活動...</a>
-                </h3>
-              </li>
-              <li class="py-9 border-white border-bottom border-opacity-50">
-                <div class="d-flex align-items-center mb-2">
-                  <span class="fs-8 py-1 px-2 me-6 bg-secondary rounded-1"
-                    >限量</span
-                  >
-                  <p class="text-white text-opacity-80">12月 5日 2022</p>
-                </div>
-                <h3 class="text-truncate fs-4">
-                  <a href="#!">出攤出攤! 台南甜點節x思味市集，活動時間 ...</a>
-                </h3>
-              </li>
-              <li class="py-9 border-white border-bottom border-opacity-50">
-                <div class="d-flex align-items-center mb-2">
-                  <span class="fs-8 py-1 px-2 me-6 bg-secondary rounded-1"
-                    >新品上市</span
-                  >
-                  <p class="text-white text-opacity-80">12月 5日 2022</p>
-                </div>
-                <h3 class="text-truncate fs-4">
-                  <a href="#!">活動資訊</a>
-                </h3>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <section class="bg-primary-dark py-11 py-lg-16" ref="sectionNews">
+      <HomeNews />
     </section>
     <!-- 熱門商品 -->
     <section class="bg-mask-texture py-11 py-lg-16 bg-secondary-100">
       <div class="container">
-        <div class="text-center mb-11 mb-lg-15">
-          <h2 class="font-serif">熱門商品</h2>
-          <img src="@/assets/images/header_line.svg" alt="" />
+        <div class="col-10 col-md-12 m-auto" data-aos="fade-up">
+          <div class="text-center mb-11 mb-lg-15">
+            <h2 class="font-serif">熱門商品</h2>
+            <img src="@/assets/images/header_line.svg" alt="" />
+          </div>
+          <ProductsCarousel :props-products="filterHotProducts" />
         </div>
-        <ProductsCarousel :props-products="filterHotProducts" />
       </div>
     </section>
     <!-- 實體店面 -->
     <section class="section-store bg-mask-texture py-11 py-lg-16">
-      <div class="container">
+      <div class="container" data-aos="fade-up">
         <div class="text-center mb-11 mb-lg-15">
           <h2 class="text-center font-serif">實體店面</h2>
           <img src="@/assets/images/header_line.svg" alt="" />
@@ -184,15 +111,18 @@
 
 <script>
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
+import HomeNews from "@/components/frontend/HomeNews.vue";
 import gsap from "gsap";
 import useScrollStore from "@/stores/useScrollStore";
 import useCalendarStore from "@/stores/CalendarStore";
 import useProductStore from "@/stores/useProductStore";
+import useArticleStore from "@/stores/useArticleStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
   components: {
     ProductsCarousel,
+    HomeNews,
   },
   props: ["isMobile"],
   data() {
@@ -218,9 +148,14 @@ export default {
   methods: {
     ...mapActions(useScrollStore, ["setScrollPosition", "setNewsPosition"]),
     ...mapActions(useCalendarStore, ["getDayOff"]),
+    ...mapActions(useArticleStore, ["getArticles"]),
+  },
+  created() {
+    this.getArticles();
   },
   mounted() {
     this.getDayOff();
+
     const readMoreImg = this.$refs.readMore;
     gsap.to(readMoreImg, {
       y: 15,
@@ -267,16 +202,6 @@ export default {
     left: 50%;
     bottom: 5%;
     transform: translateX(-50%);
-  }
-}
-
-.section-news {
-  .news-img img {
-    height: 420px;
-
-    @include respond-min(lg) {
-      height: 720px;
-    }
   }
 }
 
