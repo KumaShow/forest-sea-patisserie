@@ -91,22 +91,22 @@ const routes = [
           ],
         },
       },
-      {
-        path: "about",
-        name: "about",
-        component: () => import("@/views/frontend/AboutView.vue"),
-        meta: {
-          breadcrumb: [
-            {
-              name: "首頁",
-              link: "home",
-            },
-            {
-              name: "關於我們",
-            },
-          ],
-        },
-      },
+      // {
+      //   path: "about",
+      //   name: "about",
+      //   component: () => import("@/views/frontend/AboutView.vue"),
+      //   meta: {
+      //     breadcrumb: [
+      //       {
+      //         name: "首頁",
+      //         link: "home",
+      //       },
+      //       {
+      //         name: "關於我們",
+      //       },
+      //     ],
+      //   },
+      // },
       {
         path: "faq",
         name: "faq",
@@ -277,30 +277,5 @@ const router = createRouter({
 router.afterEach(() => {
   window.scrollTo(0, 0);
 });
-
-// const productStore = useProductStore();
-// router.beforeEach((to, from) => {
-//   console.log("to: ", to.name);
-//   console.log("from: ", from.name);
-//   if (to.name === "products" && from.name !== "product") {
-//     productStore.setCategory("");
-//   }
-// });
-
-// router.beforeEach((to, from) => {
-// const isInternalNavigation =
-//   fromPath.startsWith(toPath) || toPath.startsWith(fromPath);
-// if (!isInternalNavigation) {
-//   // 如果不是页面内部路由切换，则取消导航
-//   console.log("不允許");
-//   console.log("from:", fromPath);
-//   console.log("to:", toPath);
-//   next({ name: "home" });
-// } else {
-//   // 如果是页面内部路由切换，则允许导航
-//   console.log("允許");
-//   next();
-// }
-// });
 
 export default router;
