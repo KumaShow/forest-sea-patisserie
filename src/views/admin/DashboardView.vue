@@ -1,6 +1,6 @@
 <template v-if="isAdmin">
   <AdminNavBar />
-  <div class="position-relative">
+  <div class="position-relative py-11">
     <section class="container" v-if="this.$route.path === '/admin'">
       <h2 class="text-center my-3">後台</h2>
     </section>
@@ -68,16 +68,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scope>
-.dashboard {
-  min-height: 100vh;
-}
-</style>
-
-<!-- 
-  後台 TODO
-
-  小功能
-    alert、loading元件 
--->
