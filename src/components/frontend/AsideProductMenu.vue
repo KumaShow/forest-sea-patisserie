@@ -1,7 +1,3 @@
-<!-- 
-  BUG:
-    - 頁面跳轉問題: 跳轉頁面不會回到全部商品，會保留在上一個類別
--->
 <template>
   <div class="position-relative">
     <aside class="side-menu">
@@ -43,43 +39,9 @@ import { mapActions, mapState } from "pinia";
 export default {
   computed: {
     ...mapState(useProductStore, ["categories", "products", "category"]),
-
-    // filteredProducts() {
-    //   // if (this.setCategory === "all") {
-    //   //   // 如果未選擇類別，則顯示所有產品
-    //   //   return this.products;
-    //   // } else {
-    //   //   // 否則，只顯示選擇的類別相關的產品
-    //   // }
-    //   return this.products.filter((product) =>
-    //     product.category.match(this.setCategory)
-    //   );
-    // },
-  },
-  watch: {
-    // $route(to, from) {
-    //   console.log("to:", to.name, "from:", from.name);
-    //   if (to.name === "products" && from.name !== "product") {
-    //     this.setCategory("");
-    //   }
-    // },
   },
   methods: {
     ...mapActions(useProductStore, ["getProducts", "setCategory"]),
   },
-  // mounted() {
-  //   console.log(this.category);
-  // },
-  // unmounted() {
-  //   console.log("unmounted");
-  //   this.setCategory("");
-  // },
 };
 </script>
-
-<style lang="scss" scoped>
-.side-menu {
-  position: sticky;
-  top: 100px;
-}
-</style>
