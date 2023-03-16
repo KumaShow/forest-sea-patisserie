@@ -1,6 +1,8 @@
 import axios from "axios";
 import { defineStore } from "pinia/dist/pinia";
+import useToastMessageStore from "./useToastMessageStore";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
+const { pushMessage } = useToastMessageStore();
 
 const useCalendarStore = defineStore("useCalendarStore", {
   state: () => ({
@@ -49,7 +51,11 @@ const useCalendarStore = defineStore("useCalendarStore", {
           this.articleDayOff = dayOffArticle[0].dayOff;
         })
         .catch((err) => {
-          console.log(err);
+          pushMessage({
+            style: "danger",
+            title: "取日期失敗，請稍後再試",
+            content: `${err.response.data.message}`,
+          });
         });
     },
   },
