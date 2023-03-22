@@ -39,13 +39,7 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="customFile" class="form-label"
-                  >或 上傳圖片
-                  <!-- <i
-                    class="fas fa-spinner fa-spin"
-                    v-if="status.fileUploading"
-                  ></i> -->
-                </label>
+                <label for="customFile" class="form-label">或上傳圖片</label>
                 <input
                   type="file"
                   id="customFile"
@@ -88,8 +82,6 @@
                   </div>
                   <img class="img-fluid" :src="image" />
                 </div>
-                <!-- v-if 先判斷陣列有沒有內容 || 再判斷 陣列特定索引位置 是否有輸入文字 -->
-                <!-- 當有輸入文字的時候可以新增下一筆 -->
                 <div
                   v-if="
                     !tempProduct.imagesUrl.length ||
@@ -316,11 +308,10 @@ export default {
       this.tempProduct.imagesUrl.splice(idx, 1);
     },
 
-    // 打開 Modal
     openModal() {
       this.modal.show();
     },
-    // 關閉 Modal
+
     closeModal() {
       this.modal.hide();
     },
@@ -331,16 +322,14 @@ export default {
       // 產生一個表單格式的物件
       const formData = new FormData();
       formData.append("file-to-upload", file);
-      console.log(this.formData);
       this.$http
         .post(`${VITE_API}/api/${VITE_API_PATH}/admin/upload`, formData)
         .then((res) => {
-          console.log(res);
           this.tempProduct.imageUrl = res.data.imageUrl;
           this.$refs.files.value = "";
         })
         .catch((err) => {
-          console.log(err.response);
+          alert(err.response);
         });
     },
   },
@@ -349,29 +338,3 @@ export default {
   },
 };
 </script>
-
-<!-- 
-  產品結構
-  {
-  "data": {
-    "title": "[賣]動物園造型衣服3",
-    "category": "衣服2",
-    "origin_price": 100,
-    "price": 300,
-    "unit": "個",
-    "description": "Sit down please 名設計師設計",
-    "content": "這是內容",
-    "is_enabled": 1,
-    "imageUrl": "主圖網址",
-    "imagesUrl": [
-    "圖片網址一",
-    "圖片網址二",
-    "圖片網址三",
-    "圖片網址四",
-    "圖片網址五"
-    ]
-    // 下面為自訂新增
-    "is_hot": 1,
-    "is_limited": 1
-  }
-} -->

@@ -163,7 +163,6 @@ export default {
     ...mapState(useLoadingStore, ["isLoading"]),
   },
   watch: {
-    // 在單一產品頁點擊下方推薦商品時，需監聽動態產品 id 以取得並正確顯示對應產品
     "$route.params.id"() {
       if (this.$route.name === "product") {
         this.getProduct(this.$route.params.id);

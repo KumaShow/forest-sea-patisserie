@@ -1,8 +1,6 @@
 @import "bootstrap/scss/functions";
-@import "./helpers/variables"; // 自定義變數
+@import "./helpers/variables";
 @import "bootstrap/scss/maps"; // 5.2 更新後加入
-// @import "bootstrap/scss/mixins";
-// @import "bootstrap/scss/root";
 @import "./helpers/utilities"; // 自定義 utilities
 @import "bootstrap/scss/bootstrap";
 @import "./helpers/reboot";

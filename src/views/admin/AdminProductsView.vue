@@ -138,7 +138,6 @@ export default {
         this.tempProduct = {
           imagesUrl: [],
         };
-        // 這裡使用 refs 抓取元件 DOM 實體後，就使用內層元件方法
         this.$refs.productModal.openModal();
       } else if (status === "edit") {
         this.isNew = false;
@@ -152,7 +151,6 @@ export default {
 
     // 編輯 Product Modal 預設為更新
     updateProduct() {
-      // 預設為更新產品
       let url = `${VITE_API}/api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
       let method = "put";
 

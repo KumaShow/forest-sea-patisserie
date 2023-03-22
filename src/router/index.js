@@ -31,7 +31,6 @@ const routes = [
         path: "product/:id",
         name: "product",
         component: () => import("@/views/frontend/ProductView.vue"),
-        // 動態傳遞產品 id
         props: (route) => {
           return {
             id: route.params.id,
@@ -85,9 +84,6 @@ const routes = [
               name: "最新消息",
               link: "news",
             },
-            // {
-            //   name: "最新消息",
-            // },
           ],
         },
       },

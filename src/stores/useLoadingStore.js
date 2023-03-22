@@ -10,10 +10,6 @@ const useLoadingStore = defineStore("useLoadingStore", {
     loadingState(boolean) {
       this.isLoading = boolean;
     },
-
-    // onCancel() {
-    //   console.log("User cancelled the loader.");
-    // },
   },
 });
 

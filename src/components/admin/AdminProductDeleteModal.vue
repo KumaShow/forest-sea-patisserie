@@ -70,7 +70,6 @@ export default {
     },
   },
   mounted() {
-    // 這裡使用 refs 綁定 modal DOM 實體
     this.modal = new Modal(this.$refs.modal);
   },
 };

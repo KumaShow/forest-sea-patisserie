@@ -183,7 +183,6 @@
                     </div>
 
                     <DatePickerModal ref="datePicker" />
-                    <!--  -->
                   </div>
                 </div>
               </div>
@@ -218,7 +217,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DatePickerModal from "@/components/DatePickerModal.vue";
 import useCalendarStore from "@/stores/CalendarStore";
 import { mapActions, mapState } from "pinia";
-// import { DatePicker } from "v-calendar";
 
 export default {
   components: {
@@ -275,6 +273,7 @@ export default {
     create_at() {
       this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
     },
+
     dayOff() {
       this.tempArticle.dayOff = this.dayOff;
     },
@@ -312,8 +311,4 @@ export default {
 .ck-editor__editable_inline {
   min-height: 300px;
 }
-
-/* .date-picker {
-  position: absolute;
-} */
 </style>

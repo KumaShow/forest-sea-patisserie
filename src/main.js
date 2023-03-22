@@ -42,16 +42,15 @@ defineRule("min_value", min_value);
 
 // 設定 vee-validate 全域規則
 configure({
-  generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
-
-  validateOnInput: true, // 當輸入任何內容直接進行驗證
+  generateMessage: localize({ zh_TW: zhTW }),
+  validateOnInput: true,
 });
-
 // 設定預設語系
 setLocale("zh_TW");
+
 // font-awesome
 library.add(faFacebook, faLine, faInstagram);
-// aos
+
 Aos.init({
   duration: 1000,
   anchorPlacement: "center-bottom",
