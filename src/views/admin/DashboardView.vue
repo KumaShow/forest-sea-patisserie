@@ -1,18 +1,20 @@
 <template v-if="isAdmin">
-  <AdminNavBar />
-  <div class="position-relative py-11">
-    <section class="container" v-if="this.$route.path === '/admin'">
-      <h2 class="text-center my-3">後台</h2>
-    </section>
-    <RouterView v-if="isAdmin" />
-    <!-- <TheLoading /> -->
-    <TheToastMessage />
+  <div class="d-flex vh-100">
+    <AdminNavBar class="me-6" />
+    <div class="position-relative w-100 py-10 scrollY">
+      <section class="container" v-if="this.$route.path === '/admin'">
+        <h2 class="text-center my-3">後台</h2>
+      </section>
+      <RouterView v-if="isAdmin" />
+      <TheLoading />
+      <TheToastMessage />
+    </div>
   </div>
 </template>
 
 <script>
 import AdminNavBar from "@/components/admin/AdminNavBar.vue";
-// import TheLoading from "@/components/TheLoading.vue";
+import TheLoading from "@/components/TheLoading.vue";
 import TheToastMessage from "@/components/TheToastMessage.vue";
 import useToastMessageStore from "@/stores/useToastMessageStore";
 import { mapActions } from "pinia";
@@ -21,7 +23,7 @@ const { VITE_API } = import.meta.env;
 export default {
   components: {
     AdminNavBar,
-    // TheLoading,
+    TheLoading,
     TheToastMessage,
   },
   data() {
@@ -68,3 +70,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.scrollY {
+  overflow-y: scroll;
+}
+</style>
