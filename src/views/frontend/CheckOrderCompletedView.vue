@@ -6,69 +6,91 @@
       <div class="mb-9">
         <OrderTimeLine :step="step" />
       </div>
+      <div class="text-center mb-12">
+        <h3 class="mb-4 fs-4 fs-sm-3">感謝您的購買與支持</h3>
+        <p class="fs-8 fs-sm-7">我們將盡快為您出貨，還請隨時留意宅配通知！</p>
+        <div class="text-center my-10">
+          <button
+            type="button"
+            class="btn btn-outline-secondary rounded-1 px-6 px-md-10 py-2 py-md-4 me-6"
+            @click="$router.push('/')"
+          >
+            回首頁
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary text-white rounded-1 px-6 px-md-10 py-2 py-md-4"
+            @click="$router.push('/products')"
+          >
+            繼續購物
+          </button>
+        </div>
+      </div>
       <!-- 訂單詳細區塊 -->
-      <div class="row justify-content-center mb-11 g-8">
+      <section class="row justify-content-center mb-11 g-8">
         <!-- 訂單產品資料 -->
-        <section class="col-lg-8">
-          <h3 class="my-6 fs-5">訂單明細</h3>
-          <div>
-            <table class="table align-middle border bg-white">
-              <thead>
-                <tr>
-                  <th width="12%">商品內容</th>
-                  <th width="30%"></th>
-                  <th width="18%" class="text-center">數量</th>
-                  <th width="20%" class="text-center">單價</th>
-                  <th width="20%" class="text-end">金額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in order.products" :key="item.id">
-                  <td>
-                    <img
-                      :src="item.product.imageUrl"
-                      alt=""
-                      class="object-cover me-4"
-                      style="width: 80px; height: 80px"
-                    />
-                  </td>
-                  <td>
-                    <span>{{ item.product.title }}</span>
-                  </td>
-                  <td class="text-center">{{ item.qty }}</td>
-                  <td class="text-center">NT$ {{ item.product.price }}</td>
-                  <td class="text-end">
-                    NT$ {{ Math.round(item.final_total) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- 總金額 -->
-            <div class="mt-9 text-end">
-              <p class="fs-4 fw-bold">
-                總計:
-                <span>NT$ {{ Math.round(order.total) }}</span>
-              </p>
-            </div>
+        <section class="col-md-7">
+          <h4 class="my-6 fs-5 fs-sm-4">訂購內容</h4>
+          <!-- 訂單產品資料 -->
+          <ul v-if="order" class="p-1">
+            <template v-for="item in order.products" :key="item.id">
+              <li
+                class="product-item row align-items-center gx-4 border-bottom pb-6"
+              >
+                <!-- 商品圖片 -->
+                <div class="col overflow-hidden">
+                  <img
+                    :src="item.product.imageUrl"
+                    :alt="item.product.title"
+                    class="object-cover w-100"
+                    style="max-height: 150px"
+                  />
+                </div>
+                <!-- 商品內容 -->
+                <div class="col-8">
+                  <h5 class="fs-7 fs-md-5 mb-2">{{ item.product.title }}</h5>
+                  <p class="fs-8 fs-md-7 mb-1 text-truncate-2 text-neutral-700">
+                    {{ item.product.description }}
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <!-- 價格 -->
+                    <div>
+                      <p>
+                        NT$ {{ Math.round(item.final_total) }} x
+                        {{ item.qty }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div class="mt-6 text-end">
+            <p class="fs-4 fw-bold">
+              總計:
+              <span>NT$ {{ Math.round(order.total) }}</span>
+            </p>
           </div>
         </section>
         <!-- 訂購人資料 -->
-        <section class="col-sm-10 col-md-7 col-lg-4">
+        <section class="col-md-5">
           <div class="p-8 bg-white border">
             <!-- 訂單資訊 -->
             <div class="mb-8">
-              <h3 class="mb-6 fs-5">訂單資訊</h3>
+              <h4 class="mb-6 fs-5">訂單資訊</h4>
               <ul>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">訂購時間 :</span>
-                  {{ order.create_at }}
+                  <span class="w-auto me-auto">訂購時間 :</span>
+                  {{ createDate(order.create_at) }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">訂單編號 :</span>
+                  <span class="w-auto me-auto">訂單編號 :</span>
                   {{ order.id }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">付款狀態 :</span>
+                  <span class="w-auto me-auto">付款狀態 :</span>
                   <span v-if="order.is_paid" class="text-success p-0 w-auto">
                     已付款
                   </span>
@@ -83,40 +105,30 @@
               <h2 class="mb-6 fs-5">訂購人資料</h2>
               <ul>
                 <li class="row mb-2">
-                  <span class="col-4">姓名 :</span>
+                  <span class="col-4 me-auto">姓名 :</span>
                   {{ order.user.name }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">Email :</span>
+                  <span class="col-4 me-auto">Email :</span>
                   {{ order.user.email }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">電話 :</span>
+                  <span class="col-4 me-auto">電話 :</span>
                   {{ order.user.tel }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">地址 :</span>
+                  <span class="col-4 me-auto">地址 :</span>
                   {{ order.user.address }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">留言 :</span>
+                  <span class="col-4 me-auto">留言 :</span>
                   {{ order.message }}
                 </li>
               </ul>
             </div>
           </div>
         </section>
-      </div>
-
-      <div class="text-center my-10">
-        <button
-          type="button"
-          class="btn btn-secondary text-white rounded-1 px-6 px-md-10 py-2 py-md-4"
-          @click="$router.push('/products')"
-        >
-          繼續購物
-        </button>
-      </div>
+      </section>
     </main>
   </div>
 </template>
@@ -138,7 +150,7 @@ export default {
     ...mapState(useOrderStore, ["order"]),
   },
   methods: {
-    ...mapActions(useOrderStore, ["getOrder"]),
+    ...mapActions(useOrderStore, ["getOrder", "createDate"]),
   },
   mounted() {
     this.getOrder(this.id);

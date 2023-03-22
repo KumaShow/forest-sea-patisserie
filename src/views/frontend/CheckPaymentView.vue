@@ -8,75 +8,73 @@
       </div>
       <!-- 訂單確認付款 -->
       <div class="row justify-content-center mb-11 g-8">
-        <div class="col-lg-8">
+        <div class="col-md-7">
           <h2 class="my-6 fs-5">確認付款內容</h2>
           <!-- 訂單產品資料 -->
-          <section>
-            <table class="table align-middle border bg-white">
-              <thead>
-                <tr>
-                  <th width="15%">商品內容</th>
-                  <th width="40%"></th>
-                  <th width="15%">數量</th>
-                  <th width="15%">單價</th>
-                  <th width="15%" class="text-end">金額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template v-if="order">
-                  <tr v-for="item in order.products" :key="item.id">
-                    <td>
-                      <img
-                        :src="item.product.imageUrl"
-                        alt=""
-                        class="object-cover me-4"
-                        style="width: 80px; height: 80px"
-                      />
-                    </td>
-                    <td>
-                      <span>{{ item.product.title }}</span>
-                    </td>
-                    <td class="">{{ item.qty }}</td>
-                    <td class="">NT$ {{ item.product.price }}</td>
-                    <td class="text-end">
-                      NT$ {{ Math.round(item.final_total) }}
-                    </td>
-                  </tr>
-                </template>
-              </tbody>
-            </table>
-            <!-- 總金額 -->
-            <div class="mt-9 text-end">
-              <p class="fs-4 fw-bold">
-                總計:
-                <span>NT$ {{ Math.round(order.total) }}</span>
-              </p>
-            </div>
-          </section>
+          <ul v-if="order" class="p-1">
+            <template v-for="item in order.products" :key="item.id">
+              <li
+                class="product-item row align-items-center gx-4 border-bottom pb-6"
+              >
+                <!-- 商品圖片 -->
+                <div class="col overflow-hidden">
+                  <img
+                    :src="item.product.imageUrl"
+                    :alt="item.product.title"
+                    class="object-cover w-100"
+                    style="max-height: 150px"
+                  />
+                </div>
+                <!-- 商品內容 -->
+                <div class="col-8">
+                  <h4 class="fs-7 fs-md-5 mb-2">{{ item.product.title }}</h4>
+                  <p class="fs-8 fs-md-7 mb-1 text-truncate-2 text-neutral-700">
+                    {{ item.product.description }}
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <!-- 價格 -->
+                    <div>
+                      <p>
+                        NT$ {{ Math.round(item.final_total) }} x {{ item.qty }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div class="mt-6 text-end">
+            <p class="fs-4 fw-bold">
+              總計:
+              <span>NT$ {{ Math.round(order.total) }}</span>
+            </p>
+          </div>
         </div>
         <!-- 訂購人資料 -->
-        <section class="col-10 col-lg-4">
+        <section class="col-md-5">
           <div class="p-8 bg-white border">
             <!-- 訂單資訊 -->
             <div class="mb-8">
               <h2 class="mb-6 fs-5">訂單資訊</h2>
               <ul>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">訂購時間 :</span>
-                  {{ order.create_at }}
+                  <span class="w-auto me-auto">訂購時間 :</span>
+                  {{ createDate(order.create_at) }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">訂單編號 :</span>
+                  <span class="w-auto me-auto">訂單編號 :</span>
                   {{ order.id }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4 col-lg-5">付款狀態 :</span>
+                  <span class="w-auto me-auto me-auto">付款狀態 :</span>
                   <span v-if="order.is_paid" class="text-success p-0 w-auto">
                     已付款
                   </span>
-                  <span v-else class="text-danger p-0 w-auto"
-                    >尚須付款 <b>NT$ {{ Math.round(order.total) }}</b></span
-                  >
+                  <span v-else class="text-danger p-0 w-auto">
+                    尚須付款 <b>NT$ {{ Math.round(order.total) }}</b>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -85,23 +83,23 @@
               <h2 class="mb-6 fs-5">訂購人資料</h2>
               <ul>
                 <li class="row mb-2">
-                  <span class="col-4">姓名 :</span>
+                  <span class="col-4 me-auto">姓名 :</span>
                   {{ order.user.name }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">Email :</span>
+                  <span class="col-4 me-auto">Email :</span>
                   {{ order.user.email }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">電話 :</span>
+                  <span class="col-4 me-auto">電話 :</span>
                   {{ order.user.tel }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">地址 :</span>
+                  <span class="col-4 me-auto">地址 :</span>
                   {{ order.user.address }}
                 </li>
                 <li class="row mb-2">
-                  <span class="col-4">留言 :</span>
+                  <span class="col-4 me-auto">留言 :</span>
                   {{ order.message }}
                 </li>
               </ul>
@@ -143,7 +141,7 @@ export default {
   },
   methods: {
     ...mapActions(useCartStore, ["deleteCartItem", "updateCartItem"]),
-    ...mapActions(useOrderStore, ["getOrder"]),
+    ...mapActions(useOrderStore, ["getOrder", "createDate"]),
 
     // // 送出付款請求
     postPayment(id) {
@@ -160,7 +158,7 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     },
   },

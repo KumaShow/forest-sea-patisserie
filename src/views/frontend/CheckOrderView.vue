@@ -9,116 +9,12 @@
         </div>
         <!-- 訂單檢視 -->
         <section class="row justify-content-center mb-11 g-8">
-          <div class="col-lg-8">
+          <div class="col-md-7">
             <h3 class="my-6 fs-5">確認訂單內容</h3>
-            <section>
-              <table class="table align-middle bg-white border">
-                <thead>
-                  <tr>
-                    <th width="20%">產品資料</th>
-                    <th width="35%"></th>
-                    <th width="22%">數量</th>
-                    <th width="20%" class="text-center">單價</th>
-                    <th width="3%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <template v-if="cart.carts">
-                    <tr v-for="item in cart.carts" :key="item.id">
-                      <td>
-                        <img
-                          :src="item.product.imageUrl"
-                          alt=""
-                          class="object-cover"
-                          style="max-width: 80px; height: 80px"
-                        />
-                      </td>
-                      <td>
-                        <span>{{ item.product.title }}</span>
-                      </td>
-                      <td>
-                        <div class="input-group input-group-sm">
-                          <div class="input-group">
-                            <input
-                              v-model.number="item.qty"
-                              @blur="updateCartItem(item)"
-                              type="number"
-                              class="form-control text-center"
-                              :disabled="loadingItem === item.id"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-end">
-                        <small class="text-success" v-if="item.coupon_code"
-                          >折扣價：</small
-                        >
-                        NT$ {{ item.total }}
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn d-flex"
-                          @click="deleteCartItem(item.id)"
-                        >
-                          <span class="material-symbols-outlined">
-                            delete
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-              <div class="mt-md-9 row align-items-center">
-                <!-- 優惠碼 -->
-                <div class="col-sm-8 col-md-8 mb-4 mb-lg-0">
-                  <div
-                    class="input-group align-items-center justify-content-between flex-nowrap"
-                  >
-                    <div class="me-2 col-8">
-                      <input
-                        type="text"
-                        v-model="couponCode"
-                        class="form-control rounded-1 p-2 flex-sm-grow-0"
-                        placeholder="請輸入優惠碼"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <button
-                        type="button"
-                        class="btn btn-primary px-6 px-md-10 py-2 rounded-1"
-                        @click="postCoupon"
-                      >
-                        套用
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- 總金額 -->
-                <div class="col-sm-4 col-md-4">
-                  <div v-if="cart.total === cart.final_total" class="text-end">
-                    <p class="fs-4 fw-bold">
-                      總計:
-                      <span>NT$ {{ cart.total }}</span>
-                    </p>
-                  </div>
-                  <div v-else class="text-end">
-                    <div>
-                      <del class="fs-7 text-neutral-500"
-                        >原價: NT$ {{ cart.total }}</del
-                      >
-                      <p class="text-primary fs-5 fw-bold">
-                        折扣後: NT$ {{ Math.round(cart.final_total) }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <OrderProductList />
           </div>
           <!-- 訂購人資料表單 -->
-          <div class="col-10 col-lg-4">
+          <div class="col-md-5">
             <OrderForm class="bg-white border" />
           </div>
         </section>
@@ -151,73 +47,26 @@
 import { mapState, mapActions } from "pinia";
 import useCartStore from "@/stores/useCartStore";
 import useProductStore from "@/stores/useProductStore";
-import useLoadingStore from "@/stores/useLoadingStore";
 import useToastMessageStore from "@/stores/useToastMessageStore";
 import OrderForm from "@/components/frontend/OrderForm.vue";
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 import OrderTimeLine from "@/components/frontend/OrderTimeLine.vue";
-import debounce from "lodash/debounce";
-const { VITE_API, VITE_API_PATH } = import.meta.env;
+import OrderProductList from "@/components/frontend/OrderProductList.vue";
 
 export default {
-  components: { OrderForm, ProductsCarousel, OrderTimeLine },
+  components: { OrderForm, ProductsCarousel, OrderTimeLine, OrderProductList },
   data() {
     return {
       step: 1,
-      couponCode: "",
-      final_total: 0,
     };
   },
   computed: {
     ...mapState(useCartStore, ["cart"]),
     ...mapState(useProductStore, ["filterHotProducts"]),
-    ...mapState(useLoadingStore, ["loadingItem"]),
-
-    // countFinalTotal() {
-    //   if (this.final_total > 0) {
-    //     return Math.round(this.final_total);
-    //   }
-    //   return 0;
-    // },
   },
   methods: {
-    ...mapActions(useCartStore, [
-      "deleteCartItem",
-      "updateCartItem",
-      "getCarts",
-    ]),
+    ...mapActions(useCartStore, ["getCarts"]),
     ...mapActions(useToastMessageStore, ["pushMessage"]),
-
-    // 取得折扣 使用 lodash debounce 防止用戶多次觸發
-    postCoupon: debounce(
-      function () {
-        const url = `${VITE_API}/api/${VITE_API_PATH}/coupon`;
-        const data = {
-          data: {
-            code: this.couponCode,
-          },
-        };
-        this.$http
-          .post(url, data)
-          .then((res) => {
-            this.final_total = res.data.data.final_total;
-            this.getCarts();
-            this.pushMessage({
-              title: "套用優惠券成功",
-              content: res.data.message,
-            });
-          })
-          .catch((err) => {
-            this.pushMessage({
-              style: "danger",
-              title: "套用優惠券失敗",
-              content: err.response.data.message,
-            });
-          });
-      },
-      800,
-      { immediate: true }
-    ),
   },
 };
 </script>
