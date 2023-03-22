@@ -103,7 +103,7 @@
             <li class="nav-item me-8">
               <RouterLink
                 to="/favorite"
-                class="py-6 p-lg-2 d-block d-lg-inline fs-5 fs-lg-7"
+                class="py-6 p-lg-2 d-block d-lg-none fs-5 fs-lg-7"
                 exact-active-class="link-active"
                 >我的最愛</RouterLink
               >
@@ -223,7 +223,7 @@
       </div>
     </nav>
   </header>
-  <!-- 購物車列表 offcanvas -->
+  <!-- 購物車列表 -->
   <CartListOffcanvas />
 </template>
 
@@ -309,7 +309,7 @@ export default {
       this.setScrollPosition(window.scrollY);
     },
 
-    /* 在首頁時會判斷滾動位置及 menu 開合狀態，設定 header 樣式 */
+    // 在首頁時會判斷滾動位置及 menu 開合狀態，設定 header 樣式
     updateHeaderClass() {
       if (this.isHomeRoute) {
         if (this.isCollapseOpen || this.isInputSearchPhoneShow) {
@@ -371,18 +371,17 @@ export default {
   width: 80px;
   height: 40px;
   display: block;
-  /* 圖片取代文字 */
   text-indent: 101%;
   overflow: hidden;
   white-space: nowrap;
 }
-/* PC的搜尋樣式 */
+// PC 的搜尋樣式
 .search-input-pc {
   width: 200px;
   position: absolute;
   left: -216px;
 }
-/* 手機的搜尋樣式 */
+// 手機的搜尋樣式
 .search-input-phone {
   @include respond-min(lg) {
     display: none;
