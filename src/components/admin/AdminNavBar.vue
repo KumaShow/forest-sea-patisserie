@@ -1,65 +1,82 @@
 <template>
-  <header class="header sticky-top bg-dark">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-inherit h-100">
-      <div class="bg-dark w-100">
-        <div class="container">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+  <aside class="bg-dark vh-100">
+    <nav class="bg-primary h-100 row justify-content-between">
+      <ul class="fs-6 pe-0">
+        <li>
+          <RouterLink class="p-6 d-block link-white link-hover" to="/admin">
+            <img src="@/assets/images/logo.svg" alt="Logo" />
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            class="p-6 d-block link-white link-hover d-flex align-items-center"
+            to="/"
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-between bg-dark"
-            id="navbarNav"
+            <span class="material-symbols-outlined material-fill me-2">
+              house
+            </span>
+            返回前台
+          </RouterLink>
+        </li>
+        <li :class="{ 'nav-active': this.$route.name === 'adminProducts' }">
+          <RouterLink
+            class="p-6 d-block link-white link-hover d-flex align-items-center"
+            to="/admin/products"
           >
-            <ul class="navbar-nav">
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover active" to="/admin"
-                  >後台</RouterLink
-                >
-              </li>
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover" to="/admin/products"
-                  >產品管理</RouterLink
-                >
-              </li>
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover" to="/admin/orders"
-                  >訂單管理</RouterLink
-                >
-              </li>
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover" to="/admin/coupon"
-                  >優惠券管理</RouterLink
-                >
-              </li>
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover" to="/admin/news"
-                  >文章管理</RouterLink
-                >
-              </li>
-              <li class="nav-item me-3 text-decoration-none">
-                <RouterLink class="nav-link link-hover" to="/"
-                  >回首頁</RouterLink
-                >
-              </li>
-            </ul>
-            <div class="navbar-nav">
-              <a href="#" class="nav-link link-hover" @click.prevent="logout"
-                >登出</a
-              >
-            </div>
-          </div>
-        </div>
+            <span class="material-symbols-outlined material-fill me-2">
+              shelf_position
+            </span>
+            產品管理
+          </RouterLink>
+        </li>
+        <li :class="{ 'nav-active': this.$route.name === 'adminOrders' }">
+          <RouterLink
+            class="p-6 d-block link-white link-hover d-flex align-items-center"
+            to="/admin/orders"
+          >
+            <span class="material-symbols-outlined material-fill me-2">
+              order_approve
+            </span>
+            訂單管理
+          </RouterLink>
+        </li>
+        <li :class="{ 'nav-active': this.$route.name === 'adminCoupon' }">
+          <RouterLink
+            class="p-6 d-block link-white link-hover d-flex align-items-center"
+            to="/admin/coupon"
+          >
+            <span class="material-symbols-outlined material-fill me-2">
+              redeem
+            </span>
+            優惠券管理
+          </RouterLink>
+        </li>
+        <li :class="{ 'nav-active': this.$route.name === 'adminNews' }">
+          <RouterLink
+            class="p-6 d-block link-white link-hover d-flex align-items-center"
+            to="/admin/news"
+          >
+            <span class="material-symbols-outlined material-fill me-2">
+              article
+            </span>
+            文章管理
+          </RouterLink>
+        </li>
+      </ul>
+      <div class="mt-auto">
+        <a
+          href="#"
+          class="p-6 link-white link-hover d-flex align-items-center"
+          @click.prevent="logout"
+        >
+          <span class="material-symbols-outlined material-fill me-2">
+            logout
+          </span>
+          登出
+        </a>
       </div>
     </nav>
-  </header>
+  </aside>
 </template>
 
 <script>
@@ -82,7 +99,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  height: 60px;
+@import "bootstrap/scss/functions";
+@import "@/assets/stylesheets/helpers/variables";
+
+.nav-active,
+.nav-active:hover a {
+  background-color: $secondary;
+  color: white;
 }
 </style>
