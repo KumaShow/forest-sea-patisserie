@@ -1,42 +1,44 @@
 <template>
   <FrontNavBar />
-
-  <main
-    class="login d-flex justify-content-center align-items-center position-relative"
-  >
-    <div class="col-8 col-md-6">
-      <h1 class="h3 mb-3 font-weight-normal text-center">登入後台</h1>
-      <form id="form" class="form-signin" @submit.prevent="signIn">
-        <div class="form-floating mb-3">
-          <input
-            type="email"
-            class="form-control"
-            id="username"
-            v-model="user.username"
-            placeholder="name@example.com"
-            required
-            autofocus
-          />
-          <label for="username">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            v-model="user.password"
-            placeholder="Password"
-            required
-          />
-          <label for="password">Password</label>
-        </div>
-        <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
-          登入
-        </button>
-      </form>
-    </div>
-    <TheToastMessage />
-  </main>
+  <div class="container">
+    <main
+      class="login position-relative d-flex justify-content-center align-items-center"
+    >
+      <div class="col col-md-5">
+        <h1 class="h3 mb-6 font-weight-normal text-center">管理員登入</h1>
+        <form id="form" @submit.prevent="signIn">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="username"
+              v-model="user.username"
+              placeholder="name@example.com"
+              required
+              autofocus
+            />
+            <label for="username">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              v-model="user.password"
+              placeholder="Password"
+              required
+            />
+            <label for="password">Password</label>
+          </div>
+          <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+            登入
+          </button>
+        </form>
+        <p class="text-center mt-10">本網站僅供個人作品使用，無任何商業用途</p>
+      </div>
+      <TheToastMessage />
+    </main>
+  </div>
 </template>
 
 <script>
@@ -84,6 +86,6 @@ export default {
 
 <style lang="scss" scope>
 .login {
-  height: 100vh;
+  min-height: calc(100vh - 64px);
 }
 </style>
