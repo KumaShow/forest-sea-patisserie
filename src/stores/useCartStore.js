@@ -62,6 +62,7 @@ const useCartStore = defineStore("useCartStore", {
     // 刪除購物車單一產品
     deleteCartItem(id) {
       const url = `${VITE_API}/api/${VITE_API_PATH}/cart/${id}`;
+
       axios
         .delete(url)
         .then(() => {
@@ -92,16 +93,8 @@ const useCartStore = defineStore("useCartStore", {
         qty: item.qty,
       };
 
-      if (!item.qty || item.qty === "e") {
-        cart.qty = 1;
-        // alert("商品數量不得小於 1 個");
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "商品數量不得小於 1 個",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+      if (item.qty === 0) {
+        this.deleteCartItem(item.id);
       } else if (item.qty >= 100) {
         cart.qty = 100;
         Swal.fire({
@@ -111,26 +104,26 @@ const useCartStore = defineStore("useCartStore", {
           showConfirmButton: true,
           timer: 2000,
         });
+      } else {
+        this.loadingItem = item.id;
+        axios
+          .put(url, { data: cart })
+          .then(() => {
+            this.getCarts();
+            pushMessage({
+              style: "success",
+              title: "產品數量更新成功",
+            });
+            this.loadingItem = "";
+          })
+          .catch((err) => {
+            pushMessage({
+              style: "danger",
+              title: "產品數量更新失敗",
+              content: `${err.response.data.message}`,
+            });
+          });
       }
-      this.loadingItem = item.id;
-
-      axios
-        .put(url, { data: cart })
-        .then(() => {
-          this.getCarts();
-          pushMessage({
-            style: "success",
-            title: "產品數量更新成功",
-          });
-          this.loadingItem = "";
-        })
-        .catch((err) => {
-          pushMessage({
-            style: "danger",
-            title: "產品數量更新失敗",
-            content: `${err.response.data.message}`,
-          });
-        });
     },
   },
 });
