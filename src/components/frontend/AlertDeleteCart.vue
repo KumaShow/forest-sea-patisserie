@@ -78,7 +78,7 @@ export default {
       }
     },
 
-    // 當刪除產品 modal 跳出時，點擊 mask 的提示效果
+    // 刪除商品時的提示動畫
     clickMaskAlert() {
       const modalContent = this.$refs.modalContent;
       if (modalContent.classList.contains("animation-from-top")) {
