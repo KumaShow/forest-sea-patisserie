@@ -32,20 +32,41 @@
                     <img
                       v-lazy="product.imageUrl"
                       class="object-cover w-100"
-                      alt="甜點"
+                      :alt="product.title"
                       style="height: 200px"
                     />
+                    <span
+                      v-if="product.is_limited"
+                      class="fs-8 py-1 px-2 bg-secondary text-white rounded-1 tag-limited"
+                      >本月限定</span
+                    >
                   </div>
                   <div class="card-body">
-                    <div class="my-3">
+                    <div
+                      class="mb-3 d-flex align-items-center justify-content-between"
+                    >
                       <span
                         class="fs-8 py-1 px-2 me-3 bg-secondary text-white rounded-1"
-                        >彌月禮盒</span
+                        >{{ product.category }}</span
                       >
-                      <span
-                        class="fs-8 py-1 px-2 bg-secondary text-white rounded-1"
-                        >本月限定</span
+                      <button
+                        type="button"
+                        class="btn border-0 p-0 btn-favorite"
+                        @click.prevent="setFavorite(product.id)"
+                        @mouseover="isFavoriteHover[product.id] = true"
+                        @mouseout="isFavoriteHover[product.id] = false"
                       >
+                        <span
+                          class="material-symbols-outlined text-secondary d-flex"
+                          :class="{
+                            'material-fill':
+                              favorites.includes(product.id) ||
+                              isFavoriteHover[product.id],
+                          }"
+                        >
+                          favorite
+                        </span>
+                      </button>
                     </div>
                     <h5 class="card-title fs-5 text-neutral-900 text-truncate">
                       {{ product.title }}
@@ -81,6 +102,11 @@ export default {
   components: {
     AsideProductMenu,
   },
+  data() {
+    return {
+      isFavoriteHover: {},
+    };
+  },
   computed: {
     ...mapState(useProductStore, [
       "productsAll",
@@ -89,49 +115,11 @@ export default {
       "category",
       "searchTerm",
       "filterProductsList",
+      "favorites",
     ]),
   },
   methods: {
-    ...mapActions(useProductStore, ["addToCart"]),
+    ...mapActions(useProductStore, ["addToCart", "setFavorite"]),
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/stylesheets/helpers/mixin.scss";
-
-.product-img {
-  position: relative;
-
-  &::after {
-    content: "查看商品";
-    color: #fff;
-    font-size: 18px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 20%); // hover 前的位置
-    text-align: center;
-    font-size: 1.7rem;
-    opacity: 0; // hover 前不可見
-    transition: all 0.5s;
-    backface-visibility: hidden;
-
-    @include respond-min(md) {
-      font-size: 24px;
-    }
-  }
-}
-
-.product-link:hover {
-  img {
-    transition: all 0.3s ease;
-    transform: scale(1.2);
-    filter: brightness(60%);
-  }
-  .product-img::after {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-</style>
