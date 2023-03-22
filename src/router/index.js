@@ -266,7 +266,6 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
-  // linkActiveClass: "active",
 });
 
 // 跳頁回頂端
