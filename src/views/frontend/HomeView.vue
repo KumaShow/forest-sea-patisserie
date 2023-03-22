@@ -36,7 +36,7 @@
         <div class="col-10 col-md-12 m-auto" data-aos="fade-up">
           <div class="text-center mb-11 mb-lg-15">
             <h2 class="font-serif">熱門商品</h2>
-            <img src="@/assets/images/header_line.svg" alt="" />
+            <img src="@/assets/images/header_line.svg" alt="標題底線" />
           </div>
           <ProductsCarousel :props-products="filterHotProducts" />
         </div>
@@ -47,7 +47,7 @@
       <div class="container" data-aos="fade-up">
         <div class="text-center mb-11 mb-lg-15">
           <h2 class="text-center font-serif">實體店面</h2>
-          <img src="@/assets/images/header_line.svg" alt="" />
+          <img src="@/assets/images/header_line.svg" alt="標題底線" />
         </div>
         <div class="row align-items-center flex-row-reverse">
           <!-- 地圖 -->
@@ -184,7 +184,7 @@ export default {
     right: 0;
     width: 100%;
     height: auto;
-    background-image: url("@/assets/images/photo.jpg");
+    background-image: url("@/assets/images/landing.png");
     background-size: cover;
     background-position: center;
     filter: brightness(90%);
