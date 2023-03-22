@@ -45,3 +45,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.side-menu {
+  position: sticky;
+  top: 100px;
+}
+</style>
