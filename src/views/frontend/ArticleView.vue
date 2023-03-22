@@ -54,7 +54,6 @@ import useArticleStore from "@/stores/useArticleStore";
 import { mapActions, mapState } from "pinia";
 
 export default {
-  components: {},
   props: ["id"],
   computed: {
     ...mapState(useArticleStore, ["article"]),
