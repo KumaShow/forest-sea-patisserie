@@ -223,9 +223,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.object-fit-cover {
-  object-fit: cover;
-}
-</style>
