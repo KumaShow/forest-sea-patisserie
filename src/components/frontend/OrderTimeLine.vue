@@ -2,20 +2,20 @@
   <section class="order-process pt-4 pb-3 mb-3 mb-lg-7">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-9 col-md-7 timeline timeline-step-2"></div>
+        <div class="col-8 col-md-7 timeline"></div>
       </div>
       <div class="row">
-        <div class="col-3 col-md-5">
+        <div class="col-4 col-md-5">
           <div class="timeline-pointer text-center step-1 active">
             <p>購物車</p>
           </div>
         </div>
-        <div class="col-6 col-md-2">
+        <div class="col-4 col-md-2">
           <div class="timeline-pointer text-center step-2" :class="stepCheck">
             <p>確認結帳</p>
           </div>
         </div>
-        <div class="col-3 col-md-5">
+        <div class="col-4 col-md-5">
           <div
             class="timeline-pointer text-center step-3"
             :class="stepComplete"
