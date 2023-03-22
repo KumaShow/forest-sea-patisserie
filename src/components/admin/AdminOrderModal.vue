@@ -99,7 +99,7 @@
                       <td class="text-center">
                         <img
                           :src="item.product.imageUrl"
-                          class="object-fit-cover"
+                          class="object-cover"
                           style="height: 100px; width: 100px"
                         />
                       </td>
@@ -120,7 +120,6 @@
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      value=""
                       id="flexCheckDefault"
                       v-model="tempOrder.is_paid"
                     />
@@ -205,9 +204,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.object-fit-cover {
-  object-fit: cover;
-}
-</style>
