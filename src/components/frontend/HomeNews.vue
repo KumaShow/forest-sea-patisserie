@@ -22,7 +22,7 @@
                   {{ article.title }}
                 </h3>
                 <span
-                  class="text-neutral-500 fs-7 fs-md-6 w-md-75 w-lg-100 text-center"
+                  class="text-white fs-7 fs-md-6 w-md-75 w-lg-100 text-center"
                 >
                   {{ article.description }}
                 </span>
