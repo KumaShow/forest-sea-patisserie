@@ -12,10 +12,12 @@
       </h5>
       <button
         type="button"
-        class="btn-close"
+        class="btn p-0 text-white d-flex"
         data-bs-dismiss="offcanvas"
         aria-label="Close"
-      ></button>
+      >
+        <span class="material-symbols-outlined">close</span>
+      </button>
     </div>
     <div class="offcanvas-body bg-mask-texture">
       <div class="text-end mb-6">
@@ -37,7 +39,7 @@
           <p class="fs-3 my-10">目前無商品</p>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary rounded-1"
             data-bs-dismiss="offcanvas"
             @click="$router.push('/products')"
           >
@@ -55,7 +57,7 @@
               <div class="w-auto me-4">
                 <img
                   :src="cart.product.imageUrl"
-                  alt=""
+                  :alt="cart.product.title"
                   class="object-cover"
                   style="width: 80px; height: 80px"
                 />
