@@ -82,7 +82,7 @@
     <div class="text-end">
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-primary rounded-1 py-2"
         :disabled="!cart.carts.length"
       >
         送出訂單
@@ -152,8 +152,9 @@ export default {
       }
     },
 
+    // 檢查手機格式 09 開頭共 10 碼
     isPhone(value) {
-      const phoneNumber = /^(09)[0-9]{8}$/; // 09開頭共10碼
+      const phoneNumber = /^(09)[0-9]{8}$/;
       return phoneNumber.test(value)
         ? true
         : "需要正確的電話號碼: 09xx xxx xxx";
