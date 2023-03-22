@@ -6,6 +6,8 @@
 
 Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.github.io/forest-sea-patisserie)
 
+其他連結：[Wireframe](https://whimsical.com/vue-3-AzcKcb1DdLpVkKxDQTt6vg)、[UI 設計稿](https://www.figma.com/file/C6Oq3oQk6VvkhKxGdnLaXl/%E6%A3%AE%E6%B5%B7%E6%89%8B%E4%BD%9C%E7%94%9C%E9%BB%9E?node-id=0-1&t=IcSGzn4E2DshpOpK-0)
+
 ## 使用技術
 
 * Vite 環境建置
@@ -26,7 +28,8 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
 
 產品頁
   * 電商商品展示
-  * 商品加入購物車，與加入最愛收藏
+  * 商品加入購物車
+  * 加入最愛收藏
 
 購物車
   * 購物車無商品時，顯示按鈕引導顧客前往購買
@@ -42,3 +45,4 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
   * 新增、修改、刪除商品
   * 新增、修改、刪除優惠卷
   * 修改、刪除訂單
+  * 新增、修改、刪除消息文章
