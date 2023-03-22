@@ -57,25 +57,36 @@
                 <a
                   href="https://www.facebook.com/ForestSeaPatisserie"
                   class="me-11"
-                  ><font-awesome-icon
+                  target="_blank"
+                >
+                  <font-awesome-icon
                     class="tool-box-icon"
                     icon="fa-brands fa-facebook"
-                /></a>
+                  />
+                </a>
               </li>
               <li>
-                <a href="https://page.line.me/?accountId=033evgma" class="me-11"
-                  ><font-awesome-icon
+                <a
+                  class="me-11"
+                  href="https://page.line.me/?accountId=033evgma"
+                  target="_blank"
+                >
+                  <font-awesome-icon
                     class="tool-box-icon"
                     icon="fa-brands fa-line"
-                /></a>
+                  />
+                </a>
               </li>
               <li>
                 <a
                   href="https://www.instagram.com/patisserie_forest_sea/?igshid=ebj7xy2g2aa1"
-                  ><font-awesome-icon
+                  target="_blank"
+                >
+                  <font-awesome-icon
                     class="tool-box-icon"
                     icon="fa-brands fa-instagram"
-                /></a>
+                  />
+                </a>
               </li>
             </ul>
             <!-- 網站連結 -->
@@ -103,7 +114,9 @@
       <span>|</span>
       <RouterLink class="ms-2" to="/login">登入後台</RouterLink>
     </div>
-    <p class="text-white-70 fs-9">森海 © 2022 Copyright | made by Benson.</p>
+    <p class="text-white-70 fs-9">
+      森海 © 2022 Copyright | Design by Sin. Made by Benson.
+    </p>
   </footer>
 </template>
 
