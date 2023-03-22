@@ -18,6 +18,7 @@ const useCalendarStore = defineStore("useCalendarStore", {
     dayOff() {
       return this.dates.map((day) => new Date(day).getDate());
     },
+    // 套件屬性
     attributes() {
       return this.dates.map((date) => ({
         highlight: true,
