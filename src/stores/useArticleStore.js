@@ -8,8 +8,15 @@ const { pushMessage } = useToastMessageStore();
 
 const useArticleStore = defineStore("useArticleStore", {
   state: () => ({
-    article: {},
     articles: [],
+    article: {},
+    currentNum: 0,
+    preNum: 0,
+    nextNum: 0,
+    nextArticle: {},
+    preArticle: {},
+    hasNext: null,
+    hasPre: null,
     pagination: {},
     lastImage: "",
   }),
@@ -52,15 +59,50 @@ const useArticleStore = defineStore("useArticleStore", {
         .then((res) => {
           loadingState(false);
           this.article = res.data.article;
+
+          const currentArticle = this.articles.filter((item) => {
+            return item.id === id;
+          });
+          this.currentNum = currentArticle[0]?.num;
+          this.getNextArticle();
+          this.getPreArticle();
         })
         .catch((err) => {
           loadingState(false);
           pushMessage({
             style: "danger",
             title: "取得文章失敗，請稍後再試",
-            content: `${err.response.data.message}`,
+            content: `${err.response}`,
           });
         });
+    },
+
+    // 取得下一篇文章
+    getNextArticle() {
+      this.nextNum = this.currentNum + 1;
+      if (this.nextNum <= this.articles.length) {
+        const filterArticle = this.articles.filter((item) => {
+          return item.num === this.nextNum;
+        });
+        this.nextArticle = filterArticle[0];
+        this.hasNext = true;
+      } else {
+        this.hasNext = false;
+      }
+    },
+
+    // 取得上一篇文章
+    getPreArticle() {
+      this.preNum = this.currentNum - 1;
+      if (this.preNum) {
+        const filterArticle = this.articles.filter((item) => {
+          return item.num === this.preNum;
+        });
+        this.preArticle = filterArticle[0];
+        this.hasPre = true;
+      } else {
+        this.hasPre = false;
+      }
     },
 
     // 清空文章資料
