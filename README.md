@@ -12,12 +12,13 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
 * Vite 環境建置
 * Vue 3 Options API
 * Vue Router 建構路由
-* Vue axios 串接 RESTful API 資料
+* Vue Axios 串接 RESTful API 資料
 * 元件拆分與使用
 * 使用 Pinia 全局狀態管理
 * 使用 ESLint + Prettier 統一程式碼結構
 * 使用 Bootstrap 5 規劃響應式版型
 * Vee-Validate 表單驗證
+* V-Calendar 日期套件
 * V-Lazyload 圖片懶加載
 * 詳細套件請看 package.json
 
@@ -29,6 +30,7 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
   * 電商商品展示
   * 商品加入購物車
   * 加入最愛收藏
+  * 顧客可以搜尋商品
 
 購物車
   * 購物車無商品時，顯示按鈕引導顧客前往購買
@@ -53,4 +55,7 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
   
 首頁的本月公休: 
   * 由於後台 API 並未提供相關的資源可以儲存公休資訊，所以使用文章 API + v-calendar 來製作此功能。
-  * 實現的方式為，管理員可以從後台新增一篇公休文章，並且可以勾選公休日期。
+  * 實現的方式為，管理員可以從後台新增一篇公休文章，且可以勾選公休日期，並使用 Pinia 來跨元件使用日期資訊。
+  
+  ![](https://i.imgur.com/fQKWvM2.png)
+  ![](https://i.imgur.com/dmqR5LI.png)
