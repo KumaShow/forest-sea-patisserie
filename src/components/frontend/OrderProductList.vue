@@ -85,6 +85,7 @@
             type="button"
             class="btn btn-primary w-100 px-6 py-2 rounded-1"
             @click="postCoupon"
+            :disabled="!couponCode"
           >
             套用
           </button>
