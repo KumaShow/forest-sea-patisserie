@@ -48,3 +48,9 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
   * 新增、修改、刪除優惠卷
   * 修改、刪除訂單
   * 新增、修改、刪除消息文章
+
+## 遇到的難題
+  
+首頁的本月公休: 
+  * 由於後台 API 並未提供相關的資源可以儲存公休資訊，所以使用文章 API + v-calendar 來製作此功能。
+  * 實現的方式為，管理員可以從後台新增一篇公休文章，並且可以勾選公休日期。
