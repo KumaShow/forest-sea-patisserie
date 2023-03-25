@@ -1,50 +1,54 @@
 <template>
   <FrontNavBar />
-  <div class="container">
-    <main
-      class="login position-relative d-flex justify-content-center align-items-center"
-    >
-      <div class="col col-md-5">
-        <h1 class="h3 mb-6 font-weight-normal text-center">管理員登入</h1>
-        <form id="form" @submit.prevent="signIn">
-          <div class="form-floating mb-3">
-            <input
-              type="email"
-              class="form-control"
-              id="username"
-              v-model="user.username"
-              placeholder="name@example.com"
-              required
-              autofocus
-            />
-            <label for="username">Email address</label>
-          </div>
-          <div class="form-floating">
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              v-model="user.password"
-              placeholder="Password"
-              required
-            />
-            <label for="password">Password</label>
-          </div>
-          <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
-            登入
-          </button>
-        </form>
-        <p class="text-center mt-10">本網站僅供個人作品使用，無任何商業用途</p>
-      </div>
-      <TheToastMessage />
-    </main>
+  <div class="bg-mask-texture">
+    <div class="container">
+      <main
+        class="login position-relative d-flex justify-content-center align-items-center"
+      >
+        <div class="col col-md-5">
+          <h1 class="h3 mb-6 font-weight-normal text-center">管理員登入</h1>
+          <form id="form" @submit.prevent="signIn">
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                class="form-control"
+                id="username"
+                v-model="user.username"
+                placeholder="name@example.com"
+                required
+                autofocus
+              />
+              <label for="username">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                v-model="user.password"
+                placeholder="Password"
+                required
+              />
+              <label for="password">Password</label>
+            </div>
+            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+              登入
+            </button>
+          </form>
+          <p class="text-center mt-10">
+            本網站僅供個人作品使用，無任何商業用途
+          </p>
+        </div>
+        <TheToastMessage />
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
 import FrontNavBar from "@/components/frontend/FrontNavBar.vue";
 import TheToastMessage from "@/components/TheToastMessage.vue";
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 import { mapActions } from "pinia";
 const { VITE_API } = import.meta.env;
 
