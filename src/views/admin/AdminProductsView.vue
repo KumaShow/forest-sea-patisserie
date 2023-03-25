@@ -131,7 +131,6 @@ export default {
         });
     },
 
-    // 打開 AdminProductModal 元件
     openModal(status, product) {
       if (status === "new") {
         this.isNew = true;
