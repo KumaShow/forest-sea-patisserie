@@ -5,14 +5,5 @@
 </template>
 
 <script>
-export default {
-  components: {},
-  data() {
-    return {
-      date: new Date(),
-    };
-  },
-  computed: {},
-  methods: {},
-};
+export default {};
 </script>
