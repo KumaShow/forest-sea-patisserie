@@ -95,9 +95,10 @@
 import AdminOrderModal from "@/components/admin/AdminOrderModal.vue";
 import AdminOrderDeleteModal from "@/components/admin/AdminOrderDeleteModal.vue";
 import ThePagination from "@/components/ThePagination.vue";
-import useLoadingStore from "@/stores/useLoadingStore";
-import useToastMessageStore from "@/stores/useToastMessageStore";
-import { mapActions } from "pinia";
+import useLoadingStore from "@/stores/LoadingStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
+import useOrderStore from "@/stores/OrderStore";
+import { mapActions, mapState } from "pinia";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 
 export default {
@@ -108,48 +109,16 @@ export default {
   },
   data() {
     return {
-      orders: [],
       tempOrder: {},
-      pagination: {},
-      currentPage: 1,
     };
   },
+  computed: {
+    ...mapState(useOrderStore, ["orders", "pagination"]),
+  },
   methods: {
+    ...mapActions(useOrderStore, ["getOrders", "createDate"]),
     ...mapActions(useLoadingStore, ["loadingState"]),
     ...mapActions(useToastMessageStore, ["pushMessage"]),
-    // 取得後台訂單資料
-    getOrders(page = 1) {
-      this.currentPage = page;
-      const url = `${VITE_API}/api/${VITE_API_PATH}/admin/orders?page=${page}`;
-      this.loadingState(true);
-      this.$http
-        .get(url)
-        .then((res) => {
-          this.orders = res.data.orders;
-          this.pagination = res.data.pagination;
-          this.loadingState(false);
-        })
-        .catch((err) => {
-          this.pushMessage({
-            style: "danger",
-            title: "取得訂單資料失敗",
-            content: `${err.response.data.message}`,
-          });
-          this.loadingState(false);
-        });
-    },
-
-    // 轉換時間格式
-    createDate(ms) {
-      const timer = new Date(ms * 1000);
-      const y = timer.getFullYear();
-      const m =
-        timer.getMonth() + 1 >= 10
-          ? timer.getMonth() + 1
-          : `0${timer.getMonth() + 1}`;
-      const d = timer.getDate() >= 10 ? timer.getDate() : `0${timer.getDate()}`;
-      return `${y}/${m}/${d}`;
-    },
 
     // 打開編輯訂單 Modal
     openModal(status, order) {
