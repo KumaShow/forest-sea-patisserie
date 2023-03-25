@@ -1,0 +1,1 @@
+.page-link{display:flex;align-items:center;justify-content:center;height:40px;width:40px;background-color:transparent!important}.page-item.active .page-link{background-color:transparent;color:#c4966a;position:relative;font-size:18px}.page-item.active .page-link:after{content:"";position:absolute;bottom:0;left:0;width:100%;border-bottom:3px solid #c4966a}

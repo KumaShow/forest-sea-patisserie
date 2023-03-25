@@ -1,0 +1,1 @@
+import{u as s}from"./index-4827bd10.js";const t=s("scrollStore",{state:()=>({scrollPosition:0,isNewsPosition:!1}),actions:{setScrollPosition(o){this.scrollPosition=o},setNewsPosition(o){this.isNewsPosition=o}}});export{t as u};
