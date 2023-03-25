@@ -1,5 +1,6 @@
 # 森海手作甜點
 ![](https://i.imgur.com/UctDcM2.png)
+![](https://i.imgur.com/bcBAdG0.png)
 ## 專案說明
 以親戚開的甜點店為發想所製作的 SPA 網站，僅供練習使用無實際商業用途。
 
@@ -20,6 +21,7 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
 * Vee-Validate 表單驗證
 * V-Calendar 日期套件
 * V-Lazyload 圖片懶加載
+* C3.js 圖表
 * 詳細套件請看 package.json
 
 ## 網站功能
@@ -46,12 +48,13 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
 ### 後台
 
 管理網站
+  * 後台首頁可以觀看訂單營收狀況
   * 新增、修改、刪除商品
   * 新增、修改、刪除優惠卷
   * 修改、刪除訂單
   * 新增、修改、刪除消息文章
 
-## 遇到的難題
+## 遇到的難題與解決方法
   
 首頁的本月公休: 
   * 由於後台 API 並未提供相關的資源可以儲存公休資訊，所以使用文章 API + v-calendar 來製作此功能。
@@ -59,3 +62,9 @@ Demo : [https://kumashow.github.io/forest-sea-patisserie](https://kumashow.githu
   
   ![](https://i.imgur.com/fQKWvM2.png)
   ![](https://i.imgur.com/dmqR5LI.png)
+
+後台圖表:
+  * 當圖表元件初始掛載後，可以生成初始 C3 圖表，並以 watch 監聽圖表資料來渲染圖表內容，
+  但在切換畫面後因為 watch 對象並未改動，所以圖表重新 mounted 僅顯示初始資料。
+  * 目前的解決方法是使用 setTimeout 將圖表更新移到佇列，等待後才執行 C3.load 更新圖表內容，
+  以此來解決重新整理或跳轉畫面造成的圖表顯示問題。
