@@ -77,7 +77,7 @@ export default {
         setTimeout(() => {
           this.$refs.chartTotal.loadChart();
           this.$refs.ChartCategory.loadChart();
-        }, 1000);
+        }, 0);
       }
     },
   },
