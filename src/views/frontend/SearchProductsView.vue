@@ -95,7 +95,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useProductStore from "@/stores/useProductStore";
+import useProductStore from "@/stores/ProductStore";
 import AsideProductMenu from "@/components/frontend/AsideProductMenu.vue";
 
 export default {

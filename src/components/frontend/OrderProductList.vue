@@ -114,8 +114,8 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useLoadingStore from "@/stores/useLoadingStore";
-import useCartStore from "@/stores/useCartStore";
+import useLoadingStore from "@/stores/LoadingStore";
+import useCartStore from "@/stores/CartStore";
 import { debounce } from "lodash";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 

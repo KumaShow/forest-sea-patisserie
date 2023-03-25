@@ -93,8 +93,8 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import useCartStore from "@/stores/useCartStore";
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useCartStore from "@/stores/CartStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 
 export default {

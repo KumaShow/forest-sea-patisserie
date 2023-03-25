@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const useLoadingStore = defineStore("useLoadingStore", {
+const useLoadingStore = defineStore("loadingStore", {
   state: () => ({
     isLoading: false,
     fullPage: true,

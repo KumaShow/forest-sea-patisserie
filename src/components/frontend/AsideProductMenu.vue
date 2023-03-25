@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import useProductStore from "@/stores/useProductStore";
+import useProductStore from "@/stores/ProductStore";
 import { mapActions, mapState } from "pinia";
 
 export default {

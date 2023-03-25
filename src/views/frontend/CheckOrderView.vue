@@ -45,9 +45,9 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useCartStore from "@/stores/useCartStore";
-import useProductStore from "@/stores/useProductStore";
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useCartStore from "@/stores/CartStore";
+import useProductStore from "@/stores/ProductStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 import OrderForm from "@/components/frontend/OrderForm.vue";
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 import OrderTimeLine from "@/components/frontend/OrderTimeLine.vue";

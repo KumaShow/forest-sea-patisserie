@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 import { mapActions } from "pinia";
 
 export default {

@@ -81,8 +81,8 @@
 import ThePagination from "@/components/ThePagination.vue";
 import AdminArticleModal from "@/components/admin/AdminArticleModal.vue";
 import AdminArticleDeleteModal from "@/components/admin/AdminArticleDeleteModal.vue";
-import useLoadingStore from "@/stores/useLoadingStore";
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useLoadingStore from "@/stores/LoadingStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 import { mapActions } from "pinia";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 

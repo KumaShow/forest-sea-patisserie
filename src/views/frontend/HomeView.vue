@@ -113,10 +113,10 @@
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 import HomeNews from "@/components/frontend/HomeNews.vue";
 import gsap from "gsap";
-import useScrollStore from "@/stores/useScrollStore";
+import useScrollStore from "@/stores/ScrollStore";
 import useCalendarStore from "@/stores/CalendarStore";
-import useProductStore from "@/stores/useProductStore";
-import useArticleStore from "@/stores/useArticleStore";
+import useProductStore from "@/stores/ProductStore";
+import useArticleStore from "@/stores/ArticleStore";
 import { mapActions, mapState } from "pinia";
 
 export default {

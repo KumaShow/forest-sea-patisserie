@@ -11,7 +11,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useLoadingStore from "@/stores/useLoadingStore";
+import useLoadingStore from "@/stores/LoadingStore";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";
 

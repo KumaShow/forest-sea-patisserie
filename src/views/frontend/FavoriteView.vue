@@ -109,7 +109,7 @@
 
 <script>
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
-import useProductStore from "@/stores/useProductStore";
+import useProductStore from "@/stores/ProductStore";
 import { mapState, mapActions } from "pinia";
 
 export default {

@@ -79,8 +79,8 @@
 import AdminCouponModal from "@/components/admin/AdminCouponModal.vue";
 import AdminCouponDeleteModal from "@/components/admin/AdminCouponDeleteModal.vue";
 import ThePagination from "@/components/ThePagination.vue";
-import useLoadingStore from "@/stores/useLoadingStore";
-import useToastMessageStore from "@/stores/useToastMessageStore";
+import useLoadingStore from "@/stores/LoadingStore";
+import useToastMessageStore from "@/stores/ToastMessageStore";
 import { mapActions } from "pinia";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 

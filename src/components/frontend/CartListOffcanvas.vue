@@ -105,7 +105,7 @@
 
 <script>
 import AlertDeleteCart from "@/components/frontend/AlertDeleteCart.vue";
-import useCartStore from "@/stores/useCartStore";
+import useCartStore from "@/stores/CartStore";
 import { mapState, mapActions } from "pinia";
 
 export default {

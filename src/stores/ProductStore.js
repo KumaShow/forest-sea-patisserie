@@ -1,15 +1,15 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import useLoadingStore from "./useLoadingStore";
-import useCartStore from "./useCartStore";
-import useToastMessageStore from "./useToastMessageStore";
+import useLoadingStore from "./LoadingStore";
+import useCartStore from "./CartStore";
+import useToastMessageStore from "./ToastMessageStore";
 
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { loadingState } = useLoadingStore();
 const { getCarts } = useCartStore();
 const { pushMessage } = useToastMessageStore();
 
-const useProductStore = defineStore("useProductStore", {
+const useProductStore = defineStore("productStore", {
   state: () => ({
     isShow: false,
     products: [],

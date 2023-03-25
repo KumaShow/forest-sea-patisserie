@@ -135,7 +135,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useOrderStore from "@/stores/useOrderStore";
+import useOrderStore from "@/stores/OrderStore";
 import OrderTimeLine from "@/components/frontend/OrderTimeLine.vue";
 
 export default {

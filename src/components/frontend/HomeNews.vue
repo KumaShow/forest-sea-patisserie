@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import useArticleStore from "@/stores/useArticleStore";
+import useArticleStore from "@/stores/ArticleStore";
 import { mapActions, mapState } from "pinia";
 
 export default {

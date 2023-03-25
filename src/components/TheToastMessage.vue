@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import useToastMessageStore from "@/stores/useToastMessageStore.js";
+import useToastMessageStore from "@/stores/ToastMessageStore.js";
 import { mapState, mapActions } from "pinia";
 export default {
   computed: {

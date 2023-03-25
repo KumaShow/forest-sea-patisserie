@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const useToastMessageStore = defineStore("useToastMessageStore", {
+const useToastMessageStore = defineStore("toastMessageStore", {
   state: () => ({
     messages: [],
   }),

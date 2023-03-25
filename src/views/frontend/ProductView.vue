@@ -137,8 +137,8 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useProductStore from "@/stores/useProductStore";
-import useLoadingStore from "@/stores/useLoadingStore";
+import useProductStore from "@/stores/ProductStore";
+import useLoadingStore from "@/stores/LoadingStore";
 import AsideProductMenu from "@/components/frontend/AsideProductMenu.vue";
 import ProductsCarousel from "@/components/frontend/ProductsCarousel.vue";
 

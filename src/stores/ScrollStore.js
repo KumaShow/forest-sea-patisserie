@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const useStatusStore = defineStore("useStatusStore", {
+const useScrollStore = defineStore("scrollStore", {
   state: () => ({
     scrollPosition: 0,
     isNewsPosition: false,
@@ -17,4 +17,4 @@ const useStatusStore = defineStore("useStatusStore", {
   },
 });
 
-export default useStatusStore;
+export default useScrollStore;

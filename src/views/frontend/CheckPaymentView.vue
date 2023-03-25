@@ -122,8 +122,8 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import useCartStore from "@/stores/useCartStore";
-import useOrderStore from "@/stores/useOrderStore";
+import useCartStore from "@/stores/CartStore";
+import useOrderStore from "@/stores/OrderStore";
 import OrderTimeLine from "@/components/frontend/OrderTimeLine.vue";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 

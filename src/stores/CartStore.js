@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
-import useLoadingStore from "./useLoadingStore";
-import useToastMessageStore from "./useToastMessageStore";
+import useLoadingStore from "./LoadingStore";
+import useToastMessageStore from "./ToastMessageStore";
 
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { loadingState } = useLoadingStore();
 const { pushMessage } = useToastMessageStore();
 
-const useCartStore = defineStore("useCartStore", {
+const useCartStore = defineStore("cartStore", {
   state: () => ({
     cart: {
       carts: [],

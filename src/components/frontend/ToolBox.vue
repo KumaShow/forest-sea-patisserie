@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import useScrollStore from "@/stores/useScrollStore";
+import useScrollStore from "@/stores/ScrollStore";
 import { mapState } from "pinia";
 
 export default {

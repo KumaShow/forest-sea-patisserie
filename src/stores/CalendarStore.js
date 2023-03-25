@@ -1,6 +1,6 @@
 import axios from "axios";
 import { defineStore } from "pinia/dist/pinia";
-import useToastMessageStore from "./useToastMessageStore";
+import useToastMessageStore from "./ToastMessageStore";
 const { VITE_API, VITE_API_PATH } = import.meta.env;
 const { pushMessage } = useToastMessageStore();
 

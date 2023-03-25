@@ -121,7 +121,7 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination } from "swiper";
 import { mapActions, mapState } from "pinia";
-import useProductStore from "@/stores/useProductStore";
+import useProductStore from "@/stores/ProductStore";
 import "swiper/css";
 import "swiper/css/pagination";
 

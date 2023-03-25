@@ -230,9 +230,9 @@
 <script>
 import Collapse from "bootstrap/js/dist/collapse";
 import CartListOffcanvas from "@/components/frontend/CartListOffcanvas.vue";
-import useCartStore from "@/stores/useCartStore";
-import useProductStore from "@/stores/useProductStore";
-import useScrollStore from "@/stores/useScrollStore";
+import useCartStore from "@/stores/CartStore";
+import useProductStore from "@/stores/ProductStore";
+import useScrollStore from "@/stores/ScrollStore";
 import { mapActions, mapState } from "pinia";
 
 export default {

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import useCartStore from "@/stores/useCartStore";
+import useCartStore from "@/stores/CartStore";
 import { mapActions } from "pinia";
 
 export default {
